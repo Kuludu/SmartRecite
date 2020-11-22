@@ -10,7 +10,7 @@ app.config['UPLOAD_FOLDER'] = os.getcwd() + "/userfile/"
 
 @app.route('/word', methods=['GET'])
 def word():
-    return app.send_static_file('latest_data.txt')
+    return app.send_static_file('word.db')
 
 
 @app.route('/login', methods=['POST'])

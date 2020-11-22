@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_kuang"
+            android:background="@drawable/btn_frame"
             android:padding="3dp"
             android:text="我会了"
             android:textColor="@android:color/white"

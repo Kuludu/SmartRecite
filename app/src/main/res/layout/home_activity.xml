@@ -32,7 +32,7 @@
             android:text="错词本"
             android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:background="@drawable/btn_kuang"/>
+            android:background="@drawable/btn_frame"/>
     </RelativeLayout>
 
     <FrameLayout

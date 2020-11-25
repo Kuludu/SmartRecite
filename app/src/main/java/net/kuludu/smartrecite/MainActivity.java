@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -31,9 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private WordHelper wordHelper;
     private QuoteHelper quoteHelper;
     SharedPreferences.Editor editor = null;
-
-    int j = 0;
-    List<Integer> list;
+    int id;
 
     float x1 = 0;
     float y1 = 0;
@@ -107,47 +108,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateText.setText(mMonth + "月" + mDay + "日" +"   " + "星期" + mWeek);
     }
 
-    private void btnGetText(int id,RadioButton btn){
+    private void btnGetText(String msg,RadioButton btn){
 
+        String right = wordHelper.getXWord("cet_4",id).getChinese();
+        Log.i("--->",msg+"||||"+right);
+        if(msg.equals(right)){
+            wordText.setTextColor(Color.GREEN);
+            englishText.setTextColor(Color.GREEN);
+            btn.setTextColor(Color.GREEN);
+        }else{
+            wordText.setTextColor(Color.RED);
+            englishText.setTextColor(Color.RED);
+            btn.setTextColor(Color.RED);
+        }
     }
 
     private int getNextWord(){
         Word nextWord;
         Word prevWord;
 
-        List<Word> words = wordHelper.getRandXWords(1);
+        List<Word> words = wordHelper.getRandXWords("cet_4",1);
         Word w = words.get(0);
         wordText.setText(w.getWord());
         englishText.setText(w.getSoundmark());
-        int id = w.getIndex();
+        id = w.getIndex();
 
         if(id == 0) {
-             nextWord = wordHelper.getXWord(id+1);
-             prevWord = wordHelper.getXWord(id+2);
-        }else if(id == wordHelper.getWordsCount() - 1) {
-             nextWord = wordHelper.getXWord(id-1);
-             prevWord = wordHelper.getXWord(id-2);
+             nextWord = wordHelper.getXWord("cet_4",id+1);
+             prevWord = wordHelper.getXWord("cet_4",id+2);
+        }else if(id == wordHelper.getWordsCount("cet_4") - 1) {
+             nextWord = wordHelper.getXWord("cet_4",id-1);
+             prevWord = wordHelper.getXWord("cet_4",id-2);
         }else {
-             nextWord = wordHelper.getXWord(id+1);
-             prevWord = wordHelper.getXWord(id-1);
+             nextWord = wordHelper.getXWord("cet_4",id+1);
+             prevWord = wordHelper.getXWord("cet_4",id-1);
         }
 
 
         Random r = new Random();
         int random = r.nextInt(3);
         if(random == 0){
-            radioOne.setText("A: "+ w.getChinese());
-            radioTwo.setText("B: "+ nextWord.getChinese());
-            radioThree.setText("C: "+ prevWord.getChinese());
+            radioOne.setText("A:"+ w.getChinese());
+            radioTwo.setText("B:"+ nextWord.getChinese());
+            radioThree.setText("C:"+ prevWord.getChinese());
         }else if(random == 1){
-            radioOne.setText("A: "+ nextWord.getChinese());
-            radioTwo.setText("B: "+ w.getChinese());
-            radioThree.setText("C: "+ prevWord.getChinese());
+            radioOne.setText("A:"+ nextWord.getChinese());
+            radioTwo.setText("B:"+ w.getChinese());
+            radioThree.setText("C:"+ prevWord.getChinese());
         }else if(random == 2){
-            radioOne.setText("A: "+ nextWord.getChinese());
-            radioTwo.setText("B: "+ prevWord.getChinese());
-            radioThree.setText("C: "+ w.getChinese());
+            radioOne.setText("A:"+ nextWord.getChinese());
+            radioTwo.setText("B:"+ prevWord.getChinese());
+            radioThree.setText("C:"+ w.getChinese());
         }
+        initTextColor();
         return id;
     }
 
@@ -163,21 +176,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioGroup = findViewById(R.id.choose_group);
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
+        getNextWord();
     }
 
     public void init() {
-        sharedPreferences = getSharedPreferences("share", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        list = new ArrayList<Integer>();
-        Random r = new Random();
-        while (list.size() < 10) {
-            int i = r.nextInt();
-            if (!list.contains(i)) {
-                list.add(i);
-            }
-        }
-        km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        kl = km.newKeyguardLock("unlock");
+
     }
 
     @Override
@@ -190,6 +193,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        radioGroup.setClickable(false);
+        switch (checkedId){
+            case R.id.choose_btn_one:
+                String msg1 = radioOne.getText().toString().substring(2).trim();
+                btnGetText(msg1,radioOne);
+                break;
+            case R.id.choose_btn_two:
+                String msg2 = radioTwo.getText().toString().substring(2).trim();
+                btnGetText(msg2,radioTwo);
+                break;
+            case R.id.choose_btn_three:
+                String msg3 = radioThree.getText().toString().substring(2).trim();
+                btnGetText(msg3,radioThree);
+                break;
+        }
+    }
+    private void initTextColor(){
+        // init radio
+        radioOne.setChecked(false);
+        radioTwo.setChecked(false);
+        radioThree.setChecked(false);
+        // init text
+        radioOne.setTextColor(Color.WHITE);
+        radioTwo.setTextColor(Color.WHITE);
+        radioThree.setTextColor(Color.WHITE);
+        wordText.setTextColor(Color.WHITE);
+        englishText.setTextColor(Color.WHITE);
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            x1 = event.getX();
+            y1 = event.getY();
+        }
+        if(event.getAction() == MotionEvent.ACTION_UP){
+            x2 = event.getX();
+            y2 = event.getY();
+            if(x2 - x1 > 200){
+                Toast.makeText(this,"已掌握",Toast.LENGTH_SHORT).show();
+                getNextWord();
+            }
+        }
+
+        return super.onTouchEvent(event);
     }
 }

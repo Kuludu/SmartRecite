@@ -34,4 +34,8 @@ public class Word {
     public Integer getLast_review() {
         return last_review;
     }
+
+    public void setLast_review(Integer last_review) {
+        this.last_review = last_review;
+    }
 }

@@ -68,7 +68,7 @@ public class QuoteHelper {
         cursor.moveToFirst();
         Integer index = random.nextInt(cursor.getInt(0));
 
-        cursor = db.query("quote", null, "`index` = " + index.toString(), null, null, null, null);
+        cursor = db.query("quote", null, "`index`=?", new String[]{index.toString()}, null, null, null);
         cursor.moveToFirst();
         Quote quote = new Quote(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
 

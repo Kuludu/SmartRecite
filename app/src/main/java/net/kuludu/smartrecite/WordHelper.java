@@ -1,6 +1,7 @@
 package net.kuludu.smartrecite;
 
 import android.app.DownloadManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -128,7 +129,7 @@ public class WordHelper {
         }
 
         for (Integer index : wordIndex) {
-            cursor = db.query(level, null, "`index` = " + index.toString(), null, null, null, null);
+            cursor = db.query(level, null, "`index`=?", new String[]{index.toString()}, null, null, null, null);
             cursor.moveToFirst();
             Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
             cursor.close();
@@ -140,9 +141,14 @@ public class WordHelper {
         return result;
     }
 
-    public Word getXWord(String level, int x) {
+    public Word getXWord(String level, Integer x) {
         SQLiteDatabase db = openDatabase();
-        Cursor cursor = db.query(level, null, "`index` = " + x, null, null, null, null);
+
+        if (db == null) {
+            return null;
+        }
+
+        Cursor cursor = db.query(level, null, "`index`=?", new String[]{x.toString()}, null, null, null);
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -158,5 +164,18 @@ public class WordHelper {
         cursor.close();
 
         return null;
+    }
+
+    public int setLastReview(String level, Integer lastReview, Integer id) {
+        SQLiteDatabase db = openDatabase();
+
+        if (db == null) {
+            return 0;
+        }
+
+        ContentValues cv = new ContentValues();
+        cv.put("last_review", lastReview);
+
+        return db.update(level, cv, "`index`", new String[]{id.toString()});
     }
 }

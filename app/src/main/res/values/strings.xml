@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SmartRecite</string>
-    <string name="server_url">http://api.kuludu.net</string>
     <string name="wait_for_db_download">请等待数据库下载完成！</string>
     <string name="wait_for_quote_download">请等待名言数据库下载完成！</string>
     <string name="download_db">数据库下载</string>

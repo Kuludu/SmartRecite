@@ -3,7 +3,6 @@ package net.kuludu.smartrecite;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences sharedPreferences;
     private WordHelper wordHelper;
     private QuoteHelper quoteHelper;
-    SharedPreferences.Editor editor = null;
+    private SharedPreferences.Editor editor;
     int id;
 
     float x1 = 0;
@@ -44,22 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        initDatabaseHelper();
 
-        setContentView(R.layout.activity_main);
-        wordHelper = new WordHelper(this);
-        if (!wordHelper.isDatabaseExists()) {
-            Toast.makeText(this, getString(R.string.wait_for_db_download), Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        quoteHelper = new QuoteHelper(this);
-        if (!quoteHelper.isQuoteExists()) {
-            Toast.makeText(this, getString(R.string.wait_for_quote_download), Toast.LENGTH_SHORT).show();
-            finish();
-        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         init_control();
@@ -110,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void btnGetText(String msg,RadioButton btn){
 
-        String right = wordHelper.getXWord("cet_4",id).getChinese();
+        String right = wordHelper.getXWord(id).getChinese();
         Log.i("--->",msg+"||||"+right);
         if(msg.equals(right)){
             wordText.setTextColor(Color.GREEN);
@@ -127,21 +117,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Word nextWord;
         Word prevWord;
 
-        List<Word> words = wordHelper.getRandXWords("cet_4",1);
+        List<Word> words = wordHelper.getRandXWords(1);
         Word w = words.get(0);
         wordText.setText(w.getWord());
         englishText.setText(w.getSoundmark());
         id = w.getIndex();
 
         if(id == 0) {
-             nextWord = wordHelper.getXWord("cet_4",id+1);
-             prevWord = wordHelper.getXWord("cet_4",id+2);
-        }else if(id == wordHelper.getWordsCount("cet_4") - 1) {
-             nextWord = wordHelper.getXWord("cet_4",id-1);
-             prevWord = wordHelper.getXWord("cet_4",id-2);
+             nextWord = wordHelper.getXWord(id+1);
+             prevWord = wordHelper.getXWord(id+2);
+        }else if(id == wordHelper.getWordsCount() - 1) {
+             nextWord = wordHelper.getXWord(id-1);
+             prevWord = wordHelper.getXWord(id-2);
         }else {
-             nextWord = wordHelper.getXWord("cet_4",id+1);
-             prevWord = wordHelper.getXWord("cet_4",id-1);
+             nextWord = wordHelper.getXWord(id+1);
+             prevWord = wordHelper.getXWord(id-1);
         }
 
 
@@ -179,7 +169,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getNextWord();
     }
 
-    public void init() {
+    private void init() {
+
+    }
+
+    private void initDatabaseHelper() {
+        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        if (sharedPreferences.getString("server_url", null) == null) {
+            editor.putString("server_url", "http://api.kuludu.net");
+        }
+        if (sharedPreferences.getString("level", null) == null) {
+            editor.putString("level", "cet_4");
+        }
+        editor.apply();
+
+        wordHelper = new WordHelper(this);
+        if (!wordHelper.isDatabaseExists()) {
+            Toast.makeText(this, getString(R.string.wait_for_db_download), Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        quoteHelper = new QuoteHelper(this);
+        if (!quoteHelper.isQuoteExists()) {
+            Toast.makeText(this, getString(R.string.wait_for_quote_download), Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
     }
 

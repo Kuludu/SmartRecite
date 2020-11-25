@@ -3,6 +3,7 @@ package net.kuludu.smartrecite;
 import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -19,12 +20,15 @@ public class WordHelper {
     private String localDatabaseFilePath;
     private String remoteDatabaseFilePath;
     private File localDatabaseFile;
+    private String level;
     private Context context;
+    private SharedPreferences sharedPreferences;
 
     public WordHelper(Context context) {
+        sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        level = sharedPreferences.getString("level", "");
         localDatabaseFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
-        // TODO : Fetch from Preference
-        remoteDatabaseFilePath = context.getString(R.string.server_url) + "/word";
+        remoteDatabaseFilePath = sharedPreferences.getString("server_url", "") + "/word";
         this.context = context;
 
         localDatabaseFile = new File(localDatabaseFilePath);
@@ -61,7 +65,7 @@ public class WordHelper {
         return null;
     }
 
-    public Integer getWordsCount(String level) {
+    public Integer getWordsCount() {
         SQLiteDatabase db = openDatabase();
 
         if (db == null) {
@@ -78,7 +82,7 @@ public class WordHelper {
         return wordCount;
     }
 
-    public List<Word> getWords(String level) {
+    public List<Word> getWords() {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
 
@@ -103,7 +107,7 @@ public class WordHelper {
         return result;
     }
 
-    public List<Word> getRandXWords(String level, int requireNum) {
+    public List<Word> getRandXWords(int requireNum) {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
         Cursor cursor;
@@ -112,7 +116,7 @@ public class WordHelper {
             return null;
         }
 
-        int totalWordCount = getWordsCount(level);
+        int totalWordCount = getWordsCount();
         boolean isWordCountExceed = false;
 
         if (totalWordCount < requireNum) {
@@ -141,14 +145,14 @@ public class WordHelper {
         return result;
     }
 
-    public Word getXWord(String level, Integer x) {
+    public Word getXWord(Integer index) {
         SQLiteDatabase db = openDatabase();
 
         if (db == null) {
             return null;
         }
 
-        Cursor cursor = db.query(level, null, "`index`=?", new String[]{x.toString()}, null, null, null);
+        Cursor cursor = db.query(level, null, "`index`=?", new String[]{index.toString()}, null, null, null);
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -166,7 +170,7 @@ public class WordHelper {
         return null;
     }
 
-    public int setLastReview(String level, Integer lastReview, Integer id) {
+    public int setLastReview(Integer lastReview, Integer id) {
         SQLiteDatabase db = openDatabase();
 
         if (db == null) {
@@ -176,6 +180,6 @@ public class WordHelper {
         ContentValues cv = new ContentValues();
         cv.put("last_review", lastReview);
 
-        return db.update(level, cv, "`index`", new String[]{id.toString()});
+        return db.update(level, cv, "`index`=?", new String[]{id.toString()});
     }
 }

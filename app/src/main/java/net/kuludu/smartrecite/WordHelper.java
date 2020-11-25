@@ -60,14 +60,14 @@ public class WordHelper {
         return null;
     }
 
-    public Integer getWordsCount() {
+    public Integer getWordsCount(String level) {
         SQLiteDatabase db = openDatabase();
 
         if (db == null) {
             return null;
         }
 
-        Cursor cursor = db.query("word", new String[]{"COUNT(*)"}, null, null, null, null, null);
+        Cursor cursor = db.query(level, new String[]{"COUNT(*)"}, null, null, null, null, null);
         cursor.moveToFirst();
         Integer wordCount = cursor.getInt(0);
 
@@ -77,7 +77,7 @@ public class WordHelper {
         return wordCount;
     }
 
-    public List<Word> getWords() {
+    public List<Word> getWords(String level) {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
 
@@ -85,7 +85,7 @@ public class WordHelper {
             return null;
         }
 
-        Cursor cursor = db.query("word", null, null, null, null, null, null);
+        Cursor cursor = db.query(level, null, null, null, null, null, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
@@ -102,7 +102,7 @@ public class WordHelper {
         return result;
     }
 
-    public List<Word> getRandXWords(int requireNum) {
+    public List<Word> getRandXWords(String level, int requireNum) {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
         Cursor cursor;
@@ -111,7 +111,7 @@ public class WordHelper {
             return null;
         }
 
-        int totalWordCount = getWordsCount();
+        int totalWordCount = getWordsCount(level);
         boolean isWordCountExceed = false;
 
         if (totalWordCount < requireNum) {
@@ -128,7 +128,7 @@ public class WordHelper {
         }
 
         for (Integer index : wordIndex) {
-            cursor = db.query("word", null, "`index` = " + index.toString(), null, null, null, null);
+            cursor = db.query(level, null, "`index` = " + index.toString(), null, null, null, null);
             cursor.moveToFirst();
             Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
             cursor.close();
@@ -140,9 +140,9 @@ public class WordHelper {
         return result;
     }
 
-    public Word getXWord(int x) {
+    public Word getXWord(String level, int x) {
         SQLiteDatabase db = openDatabase();
-        Cursor cursor = db.query("word", null, "`index` = " + x, null, null, null, null);
+        Cursor cursor = db.query(level, null, "`index` = " + x, null, null, null, null);
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

@@ -28,11 +28,19 @@ public class WordHelper {
         this.context = context;
 
         localDatabaseFile = new File(localDatabaseFilePath);
-        if (!localDatabaseFile.exists()) {
+        if (!isDatabaseExists()) {
             fetchDB();
         }
 
         db = openDatabase();
+    }
+
+    public boolean isDatabaseExists() {
+        if (localDatabaseFile.exists()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void fetchDB() {
@@ -44,7 +52,7 @@ public class WordHelper {
     }
 
     private SQLiteDatabase openDatabase() {
-        if (localDatabaseFile.exists()) {
+        if (isDatabaseExists()) {
             SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(localDatabaseFile, null);
 
             return db;

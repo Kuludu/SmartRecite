@@ -54,7 +54,7 @@
             android:layout_marginLeft="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:onClick="study"
+            android:onClick="review"
             android:text="@string/review"
             android:textColor="#FFFFFF" />
 
@@ -65,7 +65,7 @@
             android:layout_marginRight="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:onClick="set"
+            android:onClick="setting"
             android:text="@string/setUp"
             android:textColor="#FFFFFF" />
     </LinearLayout>

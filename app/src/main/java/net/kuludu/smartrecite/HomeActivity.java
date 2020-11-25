@@ -16,7 +16,7 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.home_activity);
+        setContentView(R.layout.activity_home);
     }
 
     public void setting(View v) {

@@ -2,7 +2,9 @@ package net.kuludu.smartrecite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 public class HomeActivity extends AppCompatActivity {
@@ -16,8 +18,19 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.home_activity);
     }
-    private void initControl(){
 
+    public void setting(View v) {
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
     }
 
+    public void review(View v) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void wrong(View v) {
+        Intent intent = new Intent(this, WrongActivity.class);
+        startActivity(intent);
+    }
 }

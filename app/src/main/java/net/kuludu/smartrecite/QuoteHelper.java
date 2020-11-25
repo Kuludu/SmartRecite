@@ -19,9 +19,9 @@ public class QuoteHelper {
     private SharedPreferences sharedPreferences;
 
     public QuoteHelper(Context context) {
-        sharedPreferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         localQuoteFilePath = context.getApplicationContext().getFilesDir() + "/quote.db";
-        remoteQuoteFilePath = sharedPreferences.getString("server_url","") + "/quote";
+        remoteQuoteFilePath = sharedPreferences.getString("server_url", "") + "/quote";
         this.context = context;
 
         localQuoteFile = new File(localQuoteFilePath);
@@ -42,7 +42,7 @@ public class QuoteHelper {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(remoteQuoteFilePath));
         request.setTitle(context.getResources().getString(R.string.download_quote));
         request.setDestinationInExternalFilesDir(context, null, "quote.db");
-        DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         downloadManager.enqueue(request);
     }
 

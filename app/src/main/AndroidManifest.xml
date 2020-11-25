@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartRecite">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".WrongActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

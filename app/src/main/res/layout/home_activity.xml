@@ -11,8 +11,6 @@
         android:background="@android:color/holo_blue_light">
 
         <TextView
-
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -22,7 +20,6 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/wrong_btn"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
@@ -30,6 +27,7 @@
             android:layout_marginRight="10dp"
             android:padding="3dp"
             android:text="错词本"
+            android:onClick="wrong"
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:background="@drawable/btn_frame"/>
@@ -55,7 +53,7 @@
             android:layout_marginLeft="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:onClick="study"
+            android:onClick="review"
             android:text="复习"
             android:textColor="#FFFFFF" />
 
@@ -66,7 +64,7 @@
             android:layout_marginRight="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:onClick="set"
+            android:onClick="setting"
             android:text="设置"
             android:textColor="#FFFFFF" />
     </LinearLayout>

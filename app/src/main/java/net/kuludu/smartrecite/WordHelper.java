@@ -49,7 +49,7 @@ public class WordHelper {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(remoteDatabaseFilePath));
         request.setTitle(context.getResources().getString(R.string.download_db));
         request.setDestinationInExternalFilesDir(context, null, "word.db");
-        DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         downloadManager.enqueue(request);
     }
 
@@ -120,7 +120,7 @@ public class WordHelper {
         boolean isWordCountExceed = false;
 
         if (totalWordCount < requireNum) {
-            isWordCountExceed  = true;
+            isWordCountExceed = true;
 
             Log.w("WordHelper", "Word count exceed!");
         }

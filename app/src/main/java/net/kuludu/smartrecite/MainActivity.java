@@ -57,58 +57,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         // get system calendar
         Calendar calendar = Calendar.getInstance();
-        mMonth = String.valueOf(calendar.get(Calendar.MONTH) +1);
+        mMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         mDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
         mWeek = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
 
 
-        if(calendar.get(Calendar.HOUR_OF_DAY) < 10){
+        if (calendar.get(Calendar.HOUR_OF_DAY) < 10) {
             mHours = "0" + calendar.get(Calendar.HOUR_OF_DAY);
-        }else{
+        } else {
             mHours = "" + calendar.get(Calendar.HOUR_OF_DAY);
         }
 
-        if(calendar.get(Calendar.MINUTE) < 10){
+        if (calendar.get(Calendar.MINUTE) < 10) {
             mMinute = "0" + calendar.get(Calendar.MINUTE);
-        }else{
+        } else {
             mMinute = "" + calendar.get(Calendar.MINUTE);
         }
 
         // get week and show
-        if("1".equals(mWeek)){
+        if ("1".equals(mWeek)) {
             mWeek = "天";
-        }else if("2".equals(mWeek)){
+        } else if ("2".equals(mWeek)) {
             mWeek = "一";
-        }else if("3".equals(mWeek)){
+        } else if ("3".equals(mWeek)) {
             mWeek = "二";
-        }else if("4".equals(mWeek)){
+        } else if ("4".equals(mWeek)) {
             mWeek = "三";
-        }else if("5".equals(mWeek)){
+        } else if ("5".equals(mWeek)) {
             mWeek = "四";
-        }else if("6".equals(mWeek)){
+        } else if ("6".equals(mWeek)) {
             mWeek = "五";
-        }else if("7".equals(mWeek)){
+        } else if ("7".equals(mWeek)) {
             mWeek = "六";
         }
         timeText.setText(mHours + ":" + mMinute);
-        dateText.setText(mMonth + "月" + mDay + "日" +"   " + "星期" + mWeek);
+        dateText.setText(mMonth + "月" + mDay + "日" + "   " + "星期" + mWeek);
     }
 
-    private void btnGetText(String msg,RadioButton btn){
+    private void btnGetText(String msg, RadioButton btn) {
 
         String right = wordHelper.getXWord(id).getChinese();
-        if(msg.equals(right)){
+        if (msg.equals(right)) {
             wordText.setTextColor(Color.GREEN);
             englishText.setTextColor(Color.GREEN);
             btn.setTextColor(Color.GREEN);
-        }else{
+        } else {
             wordText.setTextColor(Color.RED);
             englishText.setTextColor(Color.RED);
             btn.setTextColor(Color.RED);
         }
     }
 
-    private int getNextWord(){
+    private int getNextWord() {
         Word nextWord;
         Word prevWord;
 
@@ -118,38 +118,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         englishText.setText(w.getSoundmark());
         id = w.getIndex();
 
-        if(id == 0) {
-             nextWord = wordHelper.getXWord(id+1);
-             prevWord = wordHelper.getXWord(id+2);
-        }else if(id == wordHelper.getWordsCount() - 1) {
-             nextWord = wordHelper.getXWord(id-1);
-             prevWord = wordHelper.getXWord(id-2);
-        }else {
-             nextWord = wordHelper.getXWord(id+1);
-             prevWord = wordHelper.getXWord(id-1);
+        if (id == 0) {
+            nextWord = wordHelper.getXWord(id + 1);
+            prevWord = wordHelper.getXWord(id + 2);
+        } else if (id == wordHelper.getWordsCount() - 1) {
+            nextWord = wordHelper.getXWord(id - 1);
+            prevWord = wordHelper.getXWord(id - 2);
+        } else {
+            nextWord = wordHelper.getXWord(id + 1);
+            prevWord = wordHelper.getXWord(id - 1);
         }
 
 
         Random r = new Random();
         int random = r.nextInt(3);
-        if(random == 0){
-            radioOne.setText("A:"+ w.getChinese());
-            radioTwo.setText("B:"+ nextWord.getChinese());
-            radioThree.setText("C:"+ prevWord.getChinese());
-        }else if(random == 1){
-            radioOne.setText("A:"+ nextWord.getChinese());
-            radioTwo.setText("B:"+ w.getChinese());
-            radioThree.setText("C:"+ prevWord.getChinese());
-        }else if(random == 2){
-            radioOne.setText("A:"+ nextWord.getChinese());
-            radioTwo.setText("B:"+ prevWord.getChinese());
-            radioThree.setText("C:"+ w.getChinese());
+        if (random == 0) {
+            radioOne.setText("A:" + w.getChinese());
+            radioTwo.setText("B:" + nextWord.getChinese());
+            radioThree.setText("C:" + prevWord.getChinese());
+        } else if (random == 1) {
+            radioOne.setText("A:" + nextWord.getChinese());
+            radioTwo.setText("B:" + w.getChinese());
+            radioThree.setText("C:" + prevWord.getChinese());
+        } else if (random == 2) {
+            radioOne.setText("A:" + nextWord.getChinese());
+            radioTwo.setText("B:" + prevWord.getChinese());
+            radioThree.setText("C:" + w.getChinese());
         }
         initTextColor();
         return id;
     }
 
-    private void initControl(){
+    private void initControl() {
         timeText = findViewById(R.id.time_text);
         dateText = findViewById(R.id.date_text);
         wordText = findViewById(R.id.word_text);
@@ -159,15 +159,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioOne = findViewById(R.id.choose_btn_one);
         radioTwo = findViewById(R.id.choose_btn_two);
         radioThree = findViewById(R.id.choose_btn_three);
-        Log.i("--->",radioGroup.toString());
         radioGroup.setOnCheckedChangeListener(this);
-
         playVioce.setOnClickListener(this);
         getNextWord();
-    }
-
-    private void init() {
-
     }
 
     private void initDatabaseHelper() {
@@ -197,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.play_vioce:
                 break;
         }
@@ -206,25 +200,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         radioGroup.setClickable(false);
-        switch (checkedId){
+        switch (checkedId) {
             case R.id.choose_btn_one:
                 String msg1 = radioOne.getText().toString().substring(2).trim();
-                btnGetText(msg1,radioOne);
+                btnGetText(msg1, radioOne);
                 break;
             case R.id.choose_btn_two:
                 String msg2 = radioTwo.getText().toString().substring(2).trim();
-                btnGetText(msg2,radioTwo);
+                btnGetText(msg2, radioTwo);
                 break;
             case R.id.choose_btn_three:
                 String msg3 = radioThree.getText().toString().substring(2).trim();
-                btnGetText(msg3,radioThree);
+                btnGetText(msg3, radioThree);
                 break;
         }
         radioOne.setClickable(false);
         radioTwo.setClickable(false);
         radioThree.setClickable(false);
     }
-    private void initTextColor(){
+
+    private void initTextColor() {
         // init radio
         radioOne.setChecked(false);
         radioTwo.setChecked(false);
@@ -244,18 +239,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             x1 = event.getX();
             y1 = event.getY();
         }
-        if(event.getAction() == MotionEvent.ACTION_UP){
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             x2 = event.getX();
             y2 = event.getY();
-            if(x2 - x1 > 200){
-                Toast.makeText(this,"已掌握",Toast.LENGTH_SHORT).show();
+            if (x2 - x1 > 200) {
+                Toast.makeText(this, "已掌握", Toast.LENGTH_SHORT).show();
                 getNextWord();
-            }else if(x1 - x2 > 200){
-                Toast.makeText(this,"已解锁",Toast.LENGTH_SHORT).show();
+            } else if (x1 - x2 > 200) {
+                Toast.makeText(this, "已解锁", Toast.LENGTH_SHORT).show();
                 unlock();
             }
         }
@@ -263,8 +258,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onTouchEvent(event);
     }
 
-    private void unlock(){
-        Intent intent = new Intent(this,HomeActivity.class);
+    private void unlock() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }

@@ -2,10 +2,8 @@ package net.kuludu.smartrecite;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
@@ -29,12 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private KeyguardManager.KeyguardLock kl;
     private RadioGroup radioGroup;
     private RadioButton radioOne, radioTwo, radioThree;
-    private SharedPreferences sharedPreferences;
     private WordHelper wordHelper;
     private QuoteHelper quoteHelper;
-    private SharedPreferences.Editor editor;
-    int id;
 
+    int id;
     float x1 = 0;
     float y1 = 0;
     float x2 = 0;
@@ -44,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
-                , WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         initDatabaseHelper();
@@ -95,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btnGetText(String msg, RadioButton btn) {
-
         String right = wordHelper.getXWord(id).getChinese();
         if (msg.equals(right)) {
             wordText.setTextColor(Color.GREEN);
@@ -149,6 +144,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
+    private void initDatabaseHelper() {
+        wordHelper = new WordHelper(this);
+        quoteHelper = new QuoteHelper(this);
+    }
+
     private void initControl() {
         timeText = findViewById(R.id.time_text);
         dateText = findViewById(R.id.date_text);
@@ -162,31 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
         getNextWord();
-    }
-
-    private void initDatabaseHelper() {
-        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        if (sharedPreferences.getString("server_url", null) == null) {
-            editor.putString("server_url", "http://api.kuludu.net");
-        }
-        if (sharedPreferences.getString("level", null) == null) {
-            editor.putString("level", "cet_4");
-        }
-        editor.apply();
-
-        wordHelper = new WordHelper(this);
-        if (!wordHelper.isDatabaseExists()) {
-            Toast.makeText(this, getString(R.string.wait_for_db_download), Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
-        quoteHelper = new QuoteHelper(this);
-        if (!quoteHelper.isQuoteExists()) {
-            Toast.makeText(this, getString(R.string.wait_for_quote_download), Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
     }
 
     @Override
@@ -238,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             x1 = event.getX();
             y1 = event.getY();

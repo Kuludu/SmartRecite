@@ -13,16 +13,17 @@
         android:roundIcon="@mipmap/launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartRecite">
-        <activity android:name=".WrongActivity"></activity>
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".DownloadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WrongActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

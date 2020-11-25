@@ -13,6 +13,11 @@ def word():
     return app.send_static_file('word.db')
 
 
+@app.route('/quote', methods=['GET'])
+def quore():
+    return app.send_static_file('quote.db')
+
+
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')

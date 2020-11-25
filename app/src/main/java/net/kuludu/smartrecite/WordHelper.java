@@ -1,20 +1,28 @@
 package net.kuludu.smartrecite;
 
-import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class WordHelper {
     private String localDatabaseFilePath;
@@ -38,19 +46,28 @@ public class WordHelper {
     }
 
     public boolean isDatabaseExists() {
-        if (localDatabaseFile.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        return localDatabaseFile.exists();
     }
 
     private void fetchDB() {
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(remoteDatabaseFilePath));
-        request.setTitle(context.getResources().getString(R.string.download_db));
-        request.setDestinationInExternalFilesDir(context, null, "word.db");
-        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        downloadManager.enqueue(request);
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(remoteDatabaseFilePath).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                byte[] buf = response.body().bytes();
+                FileOutputStream fos = new FileOutputStream(localDatabaseFile);
+                fos.write(buf, 0, buf.length);
+
+                fos.close();
+            }
+        });
     }
 
     private SQLiteDatabase openDatabase() {

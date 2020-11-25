@@ -1,13 +1,13 @@
 package net.kuludu.smartrecite;
 
 public class Word {
-    private int index;
+    private Integer index;
     private String word;
     private String soundmark;
     private String chinese;
-    private int last_review;
+    private Integer last_review;
 
-    public Word(int index, String word, String soundmark, String chinese, int last_review) {
+    public Word(Integer index, String word, String soundmark, String chinese, Integer last_review) {
         this.index = index;
         this.word = word;
         this.soundmark = soundmark;
@@ -15,7 +15,7 @@ public class Word {
         this.last_review = last_review;
     }
 
-    public int getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
@@ -31,7 +31,7 @@ public class Word {
         return chinese;
     }
 
-    public int getLast_review() {
+    public Integer getLast_review() {
         return last_review;
     }
 }

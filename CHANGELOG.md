@@ -1,6 +1,6 @@
 # 2020-11-22 日
 学习了数据库可视化软件 `navicat`,[点我下载](http://www.navicat.com.cn/download/navicat-premium)
-- [x] 配置环境
+[x] 配置环境
 
 计划完成:
 - [ ] Coder_Liu: 锁屏后台的功能时间

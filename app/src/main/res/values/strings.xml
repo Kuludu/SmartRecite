@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmartRecite</string>
+    <string name="server_url">http://api.kuludu.net</string>
+    <string name="download_db">数据库下载</string>
 </resources>

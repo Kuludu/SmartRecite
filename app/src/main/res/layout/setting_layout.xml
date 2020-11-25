@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="开启单词锁屏"
+            android:text="@string/openApp"
             android:textSize="17sp" />
 
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="开锁单词难度"
+            android:text="@string/wordDifficulty"
             android:textSize="17sp" />
 
         <Spinner
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="需要解锁题的个数"
+            android:text="@string/lockNumber"
             android:textSize="17sp" />
 
         <Spinner
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="每日新题的个数"
+            android:text="@string/newQuestions"
             android:textSize="17sp" />
 
         <Spinner
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="每日复习题的个数"
+            android:text="@string/reviewQuestions"
             android:textSize="17sp" />
 
         <Spinner
@@ -126,5 +126,24 @@
             android:background="@null">
 
         </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:padding="10dp"
+            android:text="@string/serverUrl"
+            android:textSize="17sp" />
+
+
+
     </LinearLayout>
 </LinearLayout>

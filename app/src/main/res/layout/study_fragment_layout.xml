@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:text="名人名句"
+        android:text="@string/memorableQuotes"
         android:textSize="27sp" />
 
 
@@ -56,14 +56,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="答错题数"
+            android:text="@string/numberWrongAnswers"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="掌握单词"
+            android:text="@string/masterWords"
             android:textSize="20sp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学习难度"
+            android:text="@string/difficultyLearning"
             android:textSize="20sp"
             android:layout_marginTop="140dp"
             android:layout_marginLeft="20dp"
@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总共学习"
+            android:text="@string/totalStudy"
             android:textSize="20sp"
             android:layout_marginTop="140dp"
             android:layout_alignParentRight="true"
@@ -126,7 +126,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="词"
+            android:text="@string/word"
             android:textSize="20sp"
             android:layout_marginTop="205dp"
             android:layout_alignParentRight="true"
@@ -149,7 +149,7 @@
             android:layout_marginTop="65dp"
             android:layout_marginRight="25dp"
             android:layout_alignParentRight="true"
-            android:text="词"
+            android:text="@string/word"
             android:textSize="20sp" />
     </RelativeLayout>
 </LinearLayout>

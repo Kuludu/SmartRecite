@@ -60,6 +60,23 @@ public class WordHelper {
         return null;
     }
 
+    public Integer getWordsCount() {
+        SQLiteDatabase db = openDatabase();
+
+        if (db == null) {
+            return null;
+        }
+
+        Cursor cursor = db.query("word", new String[]{"COUNT(*)"}, null, null, null, null, null);
+        cursor.moveToFirst();
+        Integer wordCount = cursor.getInt(0);
+
+        cursor.close();
+        db.close();
+
+        return wordCount;
+    }
+
     public List<Word> getWords() {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
@@ -88,14 +105,13 @@ public class WordHelper {
     public List<Word> getRandXWords(int requireNum) {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
+        Cursor cursor;
 
         if (db == null) {
             return null;
         }
 
-        Cursor cursor = db.query("word", new String[]{"COUNT(*)"}, null, null, null, null, null);
-        cursor.moveToFirst();
-        int totalWordCount = cursor.getInt(0);
+        int totalWordCount = getWordsCount();
         boolean isWordCountExceed = false;
 
         if (totalWordCount < requireNum) {
@@ -115,10 +131,10 @@ public class WordHelper {
             cursor = db.query("word", null, "`index` = " + index.toString(), null, null, null, null);
             cursor.moveToFirst();
             Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            cursor.close();
             result.add(word);
         }
 
-        cursor.close();
         db.close();
 
         return result;

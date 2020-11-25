@@ -15,7 +15,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class WordHelper {
-    private SQLiteDatabase db;
     private String localDatabaseFilePath;
     private String remoteDatabaseFilePath;
     private File localDatabaseFile;
@@ -31,8 +30,6 @@ public class WordHelper {
         if (!isDatabaseExists()) {
             fetchDB();
         }
-
-        db = openDatabase();
     }
 
     public boolean isDatabaseExists() {
@@ -65,6 +62,7 @@ public class WordHelper {
 
     public List<Word> getWords() {
         List<Word> result = new ArrayList<>();
+        SQLiteDatabase db = openDatabase();
 
         if (db == null) {
             return null;
@@ -89,6 +87,7 @@ public class WordHelper {
 
     public List<Word> getRandXWords(int requireNum) {
         List<Word> result = new ArrayList<>();
+        SQLiteDatabase db = openDatabase();
 
         if (db == null) {
             return null;
@@ -123,5 +122,25 @@ public class WordHelper {
         db.close();
 
         return result;
+    }
+
+    public Word getXWord(int x) {
+        SQLiteDatabase db = openDatabase();
+        Cursor cursor = db.query("word", null, "`index` = " + x, null, null, null, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+
+            cursor.close();
+            db.close();
+
+            return word;
+        }
+
+        db.close();
+        cursor.close();
+
+        return null;
     }
 }

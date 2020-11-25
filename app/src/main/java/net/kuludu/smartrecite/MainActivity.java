@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton radioOne, radioTwo, radioThree;
     private SharedPreferences sharedPreferences;
     private WordHelper wordHelper;
+    private QuoteHelper quoteHelper;
     SharedPreferences.Editor editor = null;
 
     int j = 0;
@@ -46,7 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         wordHelper = new WordHelper(this);
         if (!wordHelper.isDatabaseExists()) {
-            Toast.makeText(this, getString(R.string.wait_for_download), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.wait_for_db_download), Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        quoteHelper = new QuoteHelper(this);
+        if (!quoteHelper.isQuoteExists()) {
+            Toast.makeText(this, getString(R.string.wait_for_quote_download), Toast.LENGTH_SHORT).show();
             finish();
         }
 

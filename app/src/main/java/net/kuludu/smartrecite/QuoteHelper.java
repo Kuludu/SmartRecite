@@ -2,6 +2,7 @@ package net.kuludu.smartrecite;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -15,11 +16,12 @@ public class QuoteHelper {
     private String remoteQuoteFilePath;
     private File localQuoteFile;
     private Context context;
+    private SharedPreferences sharedPreferences;
 
     public QuoteHelper(Context context) {
+        sharedPreferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);
         localQuoteFilePath = context.getApplicationContext().getFilesDir() + "/quote.db";
-        // TODO : Fetch from Preference
-        remoteQuoteFilePath = context.getString(R.string.server_url) + "/quote";
+        remoteQuoteFilePath = sharedPreferences.getString("server_url","") + "/quote";
         this.context = context;
 
         localQuoteFile = new File(localQuoteFilePath);

@@ -1,8 +1,7 @@
 package net.kuludu.smartrecite;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -42,18 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
 
         initDatabaseHelper();
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        init_control();
-
+        initControl();
     }
 
     @Override
@@ -101,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void btnGetText(String msg,RadioButton btn){
 
         String right = wordHelper.getXWord(id).getChinese();
-        Log.i("--->",msg+"||||"+right);
         if(msg.equals(right)){
             wordText.setTextColor(Color.GREEN);
             englishText.setTextColor(Color.GREEN);
@@ -154,17 +149,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
-    public void init_control(){
+    private void initControl(){
         timeText = findViewById(R.id.time_text);
         dateText = findViewById(R.id.date_text);
         wordText = findViewById(R.id.word_text);
         englishText = findViewById(R.id.english_text);
         playVioce = findViewById(R.id.play_vioce);
+        radioGroup = findViewById(R.id.choose_group);
         radioOne = findViewById(R.id.choose_btn_one);
         radioTwo = findViewById(R.id.choose_btn_two);
         radioThree = findViewById(R.id.choose_btn_three);
-        radioGroup = findViewById(R.id.choose_group);
+        Log.i("--->",radioGroup.toString());
         radioGroup.setOnCheckedChangeListener(this);
+
         playVioce.setOnClickListener(this);
         getNextWord();
     }
@@ -223,12 +220,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnGetText(msg3,radioThree);
                 break;
         }
+        radioOne.setClickable(false);
+        radioTwo.setClickable(false);
+        radioThree.setClickable(false);
     }
     private void initTextColor(){
         // init radio
         radioOne.setChecked(false);
         radioTwo.setChecked(false);
         radioThree.setChecked(false);
+        radioOne.setClickable(true);
+        radioTwo.setClickable(true);
+        radioThree.setClickable(true);
         // init text
         radioOne.setTextColor(Color.WHITE);
         radioTwo.setTextColor(Color.WHITE);
@@ -237,8 +240,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         englishText.setTextColor(Color.WHITE);
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             x1 = event.getX();
             y1 = event.getY();
@@ -249,9 +254,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(x2 - x1 > 200){
                 Toast.makeText(this,"已掌握",Toast.LENGTH_SHORT).show();
                 getNextWord();
+            }else if(x1 - x2 > 200){
+                Toast.makeText(this,"已解锁",Toast.LENGTH_SHORT).show();
+                unlock();
             }
         }
 
         return super.onTouchEvent(event);
+    }
+
+    private void unlock(){
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
     }
 }

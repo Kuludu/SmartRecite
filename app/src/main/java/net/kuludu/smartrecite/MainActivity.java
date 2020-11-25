@@ -254,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 unlock();
             }
         }
-
         return super.onTouchEvent(event);
     }
 

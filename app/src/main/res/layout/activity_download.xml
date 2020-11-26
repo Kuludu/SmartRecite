@@ -14,16 +14,6 @@
         android:textColor="@android:color/white"
         android:textSize="50sp" />
 
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingVertical="@android:dimen/app_icon_size"
-        android:text="0"
-        android:textColor="@android:color/white"
-        android:textSize="50sp" />
-
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/load_pl"
         android:layout_width="match_parent"

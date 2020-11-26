@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +30,6 @@ public class DownloadActivity extends AppCompatActivity {
     private String remoteQuoteFilePath;
     private String localWordFilePath;
     private String localQuoteFilePath;
-    private TextView count;
     private Handler handler;
 
     @Override
@@ -40,16 +38,23 @@ public class DownloadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_download);
 
         handler = new Handler() {
+            Integer count = 0;
+
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
-                Integer cur_count = Integer.parseInt(count.getText().toString());
-                cur_count++;
-                count.setText(cur_count.toString());
+                count++;
+                Log.i("DB", count.toString());
+
+                if (count >= 2) {
+                    Toast.makeText(DownloadActivity.this, "Download complete!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
-        count = findViewById(R.id.count);
 
         initDatabase();
         checkDatabase();

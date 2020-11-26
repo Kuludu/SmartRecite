@@ -27,19 +27,19 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:background="@drawable/btn_frame"
             android:padding="0sp"
             android:text="@string/wrongWords"
             android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:background="@drawable/btn_frame"/>
+            android:textSize="15sp" />
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="50dp"></FrameLayout>
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"></FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -3,6 +3,8 @@ package net.kuludu.smartrecite;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,12 +32,23 @@ public class DownloadActivity extends AppCompatActivity {
     private String localWordFilePath;
     private String localQuoteFilePath;
     private TextView count;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
 
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                Integer cur_count = Integer.parseInt(count.getText().toString());
+                cur_count++;
+                count.setText(cur_count.toString());
+            }
+        };
         count = findViewById(R.id.count);
 
         initDatabase();
@@ -111,9 +124,7 @@ public class DownloadActivity extends AppCompatActivity {
 
                     fos.close();
 
-                    Integer cur_count = Integer.parseInt(count.getText().toString());
-                    cur_count++;
-                    count.setText(cur_count.toString());
+                    handler.sendEmptyMessage(0);
                 }
             });
         } catch (MalformedURLException e) {

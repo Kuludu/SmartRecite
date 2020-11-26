@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress AndroidUnresolvableTag -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidUnresolvableTag -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@mipmap/background_2">
+    android:background="@mipmap/background_2"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -29,9 +27,9 @@
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/load_pl"
         android:layout_width="match_parent"
-        android:alpha= "0.8"
         android:layout_height="30dp"
         android:layout_marginLeft="0dp"
+        android:alpha="0.8"
         android:src="@mipmap/loading" />
 
 </LinearLayout>

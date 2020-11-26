@@ -6,27 +6,16 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class WordHelper {
-    private String localDatabaseFilePath;
-    private String remoteDatabaseFilePath;
+    private String localWordFilePath;
     private File localDatabaseFile;
     private String level;
     private Context context;
@@ -35,39 +24,13 @@ public class WordHelper {
     public WordHelper(Context context) {
         sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         level = sharedPreferences.getString("level", "");
-        localDatabaseFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
-        remoteDatabaseFilePath = sharedPreferences.getString("server_url", "") + "/word";
         this.context = context;
-
-        localDatabaseFile = new File(localDatabaseFilePath);
-        if (!isDatabaseExists()) {
-            fetchDB();
-        }
+        localWordFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
+        localDatabaseFile = new File(localWordFilePath);
     }
 
     public boolean isDatabaseExists() {
         return localDatabaseFile.exists();
-    }
-
-    private void fetchDB() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(remoteDatabaseFilePath).build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                byte[] buf = response.body().bytes();
-                FileOutputStream fos = new FileOutputStream(localDatabaseFile);
-                fos.write(buf, 0, buf.length);
-
-                fos.close();
-            }
-        });
     }
 
     private SQLiteDatabase openDatabase() {

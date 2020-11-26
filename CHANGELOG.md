@@ -14,6 +14,17 @@ dwj 去掉标题栏，全屏显示，layout国际化
 Kuludu 更新单词解析,完成名言解析
 
 计划完成:
-- [ ] Coder_Liu: 完成HomeActivity的功能 
-- [ ] dwj: 优化layout
-- [ ] Kuludu: 错题本
+- [x] Coder_Liu: 完成HomeActivity的后端实现
+- [x] dwj: 优化layout,动图
+- [x] Kuludu: 错题本
+
+# 2020-11-26
+- 今日完成
+Coder_Liu 完成HomeActivity的后端实现,完成了StudyFragment
+dwj 优化layout,动图，UI壁纸设计
+Kuludu 错题本,LoginHelper
+
+计划完成:
+- [ ] Coder_Liu: 锁屏功能实现
+- [ ] dwj: 设置界面的实现
+- [ ] Kuludu: 完成登录功能的实现

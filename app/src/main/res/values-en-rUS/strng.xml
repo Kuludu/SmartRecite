@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources >
+<resources>
     <string name="app_name">SmartRecite</string>
     <string name="server_url">http://api.kuludu.net</string>
     <string name="wait_for_db_download">Please wait for the database download to complete!</string>
@@ -8,8 +8,8 @@
     <string name="download_quote">Download famous words</string>
 
     <string name="wrongWords">Wrong words</string>
-    <string name="review" >Review</string>
-    <string name="setUp" >Set up</string>
+    <string name="review">Review</string>
+    <string name="setUp">Set up</string>
 
     <string name="openApp">Open SmartRecite</string>
     <string name="wordDifficulty">Difficulty of unlocking words</string>
@@ -19,9 +19,9 @@
     <string name="serverUrl">Server URL</string>
 
     <string name="memorableQuotes">Memorable Quotes</string>
-    <string name="numberWrongAnswers">Number of wrong answers</string>
-    <string name="masterWords">Master the words</string>
-    <string name="difficultyLearning">Difficulty in learning</string>
-    <string name="totalStudy">Total study</string>
-    <string name="word">Word</string>
+    <string name="numberWrongAnswers">Wrong</string>
+    <string name="masterWords">Master</string>
+    <string name="difficultyLearning">Difficulty</string>
+    <string name="totalStudy">Total</string>
+    <string name="word">W</string>
 </resources>

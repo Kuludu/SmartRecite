@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources >
+<resources>
     <string name="app_name">SmartRecite</string>
     <string name="server_url">http://api.kuludu.net</string>
     <string name="wait_for_db_download">请等待数据库下载完成！</string>
@@ -7,9 +7,9 @@
     <string name="download_db">数据库下载</string>
     <string name="download_quote">名言库下载</string>
 
-    <string name="wrongWords" >错词本</string>
-    <string name="review" >复习</string>
-    <string name="setUp" >设置</string>
+    <string name="wrongWords">错词本</string>
+    <string name="review">复习</string>
+    <string name="setUp">设置</string>
 
     <string name="openApp">开启单词锁屏</string>
     <string name="wordDifficulty">开锁单词难度</string>

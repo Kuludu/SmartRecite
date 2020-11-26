@@ -12,6 +12,7 @@ import android.view.WindowManager;
 public class HomeActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private StudyFragment studyFragment;
+    private SettingFragment settingFragment;
 
 
     @Override
@@ -22,9 +23,9 @@ public class HomeActivity extends AppCompatActivity {
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         studyFragment = new StudyFragment();
-
-
+        settingFragment = new SettingFragment();
         setContentView(R.layout.activity_home);
+        review(getWindow().getDecorView());
     }
 
     public void setStudyFragment(Fragment fragment) {
@@ -34,8 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void setting(View v) {
-        Intent intent = new Intent(this, SettingActivity.class);
-        startActivity(intent);
+        setStudyFragment(settingFragment);
     }
 
     public void review(View v) {

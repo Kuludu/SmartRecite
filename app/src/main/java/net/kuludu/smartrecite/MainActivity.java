@@ -9,14 +9,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private WordHelper wordHelper;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private LinearLayout linearLayout;
 
     int id;
     float x1 = 0;
@@ -95,18 +97,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btnGetText(String msg, RadioButton btn) {
-        Word right_word = wordHelper.getXWord(id);
-        String right_chinese = right_word.getChinese();
+        Word word = wordHelper.getXWord(id);
+        String right_chinese = word.getChinese();
         if (msg.equals(right_chinese)) {
             wordText.setTextColor(Color.GREEN);
             englishText.setTextColor(Color.GREEN);
             btn.setTextColor(Color.GREEN);
+            saveRight(word);
         } else {
             wordText.setTextColor(Color.RED);
             englishText.setTextColor(Color.RED);
             btn.setTextColor(Color.RED);
-
-            saveWrong(right_word);
+            saveWrong(word);
         }
     }
 
@@ -114,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Set<String> wrong = sharedPreferences.getStringSet("wrong", new HashSet<>());
         wrong.add(word.getIndex().toString());
         editor.putStringSet("wrong", wrong);
+        editor.apply();
+    }
+
+    private void saveRight(Word word) {
+        Set<String> wrong = sharedPreferences.getStringSet("right", new HashSet<>());
+        wrong.add(word.getIndex().toString());
+        editor.putStringSet("right", wrong);
+        editor.apply();
     }
 
     private int getNextWord() {
@@ -173,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioOne = findViewById(R.id.choose_btn_one);
         radioTwo = findViewById(R.id.choose_btn_two);
         radioThree = findViewById(R.id.choose_btn_three);
+        linearLayout = findViewById(R.id.backgroung);
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
         getNextWord();
@@ -240,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (x1 - x2 > 200) {
                 Toast.makeText(this, "已解锁", Toast.LENGTH_SHORT).show();
                 unlock();
+            } else if(y1 - y2 > 200){
+                changeBackground();
             }
         }
         return super.onTouchEvent(event);
@@ -248,5 +261,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void unlock() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+    }
+
+    private void changeBackground(){
+        Random random = new Random();
+        int index = random.nextInt(5);
+        List<Integer> backgrounds = new ArrayList<Integer>();
+        backgrounds.add(R.mipmap.background_1);
+        backgrounds.add(R.mipmap.background_2);
+        backgrounds.add(R.mipmap.background_3);
+        backgrounds.add(R.mipmap.background_4);
+        backgrounds.add(R.mipmap.background_5);
+        linearLayout.setBackgroundResource(backgrounds.get(index));
     }
 }

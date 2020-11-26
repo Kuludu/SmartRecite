@@ -30,6 +30,7 @@
             android:background="@drawable/btn_frame"
             android:padding="0sp"
             android:text="@string/wrongWords"
+            android:onClick="wrong"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </RelativeLayout>

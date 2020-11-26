@@ -16,5 +16,4 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/ease_close_icon"
         android:visibility="invisible" />
-
 </FrameLayout>

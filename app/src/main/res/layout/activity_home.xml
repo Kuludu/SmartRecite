@@ -28,9 +28,9 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/btn_frame"
+            android:onClick="wrong"
             android:padding="0sp"
             android:text="@string/wrongWords"
-            android:onClick="wrong"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </RelativeLayout>

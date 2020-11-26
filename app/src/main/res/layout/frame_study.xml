@@ -98,7 +98,6 @@
             android:textSize="27sp" />
 
 
-
         <TextView
             android:id="@+id/difficulty_text"
             android:layout_width="wrap_content"

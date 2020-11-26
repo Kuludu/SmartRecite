@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (x1 - x2 > 200) {
                 Toast.makeText(this, "已解锁", Toast.LENGTH_SHORT).show();
                 unlock();
-            } else if(y1 - y2 > 200){
+            } else if (y1 - y2 > 200) {
                 changeBackground();
             }
         }
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    private void changeBackground(){
+    private void changeBackground() {
         Random random = new Random();
         int index = random.nextInt(5);
         List<Integer> backgrounds = new ArrayList<Integer>();

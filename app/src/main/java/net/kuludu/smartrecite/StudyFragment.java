@@ -23,6 +23,7 @@ public class StudyFragment extends Fragment {
     public StudyFragment() {
         // Required empty public constructor
     }
+
     public static StudyFragment newInstance(String param1, String param2) {
         StudyFragment fragment = new StudyFragment();
         Bundle args = new Bundle();
@@ -49,7 +50,7 @@ public class StudyFragment extends Fragment {
         return view;
     }
 
-    private void setText(){
+    private void setText() {
         Quote quote = quoteHelper.getRandQuote();
         String quoteChinese = quote.getChinese();
         String quoteEnglish = quote.getEnglish();
@@ -57,7 +58,7 @@ public class StudyFragment extends Fragment {
         quoteChinaText.setText(quoteChinese);
     }
 
-    private void initControl(View view){
+    private void initControl(View view) {
         difficultyText = view.findViewById(R.id.difficulty_text);
         quoteEnglishText = view.findViewById(R.id.wisdom_english);
         quoteChinaText = view.findViewById(R.id.wisdom_china);

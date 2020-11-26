@@ -27,9 +27,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
     }
 
-    public void setStudyFragment(Fragment fragment){
+    public void setStudyFragment(Fragment fragment) {
         transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout,fragment);
+        transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();
     }
 

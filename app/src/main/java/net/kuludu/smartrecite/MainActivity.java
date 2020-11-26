@@ -2,6 +2,7 @@ package net.kuludu.smartrecite;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -17,8 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private TextView timeText, dateText, wordText, englishText;
@@ -29,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioGroup radioGroup;
     private RadioButton radioOne, radioTwo, radioThree;
     private WordHelper wordHelper;
-    private QuoteHelper quoteHelper;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     int id;
     float x1 = 0;
@@ -91,8 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btnGetText(String msg, RadioButton btn) {
-        String right = wordHelper.getXWord(id).getChinese();
-        if (msg.equals(right)) {
+        Word right_word = wordHelper.getXWord(id);
+        String right_chinese = right_word.getChinese();
+        if (msg.equals(right_chinese)) {
             wordText.setTextColor(Color.GREEN);
             englishText.setTextColor(Color.GREEN);
             btn.setTextColor(Color.GREEN);
@@ -100,7 +105,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             wordText.setTextColor(Color.RED);
             englishText.setTextColor(Color.RED);
             btn.setTextColor(Color.RED);
+
+            saveWrong(right_word);
         }
+    }
+
+    private void saveWrong(Word word) {
+        Set<String> wrong = sharedPreferences.getStringSet("wrong", new HashSet<>());
+        wrong.add(word.getIndex().toString());
+        editor.putStringSet("wrong", wrong);
     }
 
     private int getNextWord() {
@@ -146,7 +159,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initDatabaseHelper() {
         wordHelper = new WordHelper(this);
-        quoteHelper = new QuoteHelper(this);
+        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     private void initControl() {

@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartRecite">
+        <activity android:name=".HelpActivity"></activity>
         <activity android:name=".DownloadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

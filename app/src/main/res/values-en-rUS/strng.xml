@@ -7,7 +7,7 @@
     <string name="download_db">Please wait for the database download to complete!</string>
     <string name="download_quote">Download famous words</string>
 
-    <string name="wrongWords">Wrong words</string>
+    <string name="wrongWords">Wrong</string>
     <string name="review">Review</string>
     <string name="setUp">Set up</string>
 
@@ -23,5 +23,4 @@
     <string name="masterWords">Master</string>
     <string name="difficultyLearning">Difficulty</string>
     <string name="totalStudy">Total</string>
-    <string name="word">W</string>
 </resources>

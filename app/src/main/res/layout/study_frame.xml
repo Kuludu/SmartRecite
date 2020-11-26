@@ -91,20 +91,13 @@
             android:id="@+id/wrong_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="60dp"
             android:text="10"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="27sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="65dp"
-            android:text="词"
-            android:textSize="20sp" />
+
 
         <TextView
             android:id="@+id/difficulty_text"
@@ -122,19 +115,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="200dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="40dp"
             android:text="70"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="27sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="205dp"
-            android:layout_marginRight="25dp"
-            android:text="@string/word"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/already_mastered"
@@ -142,18 +127,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="40dp"
             android:text="40"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="27sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="65dp"
-            android:layout_marginRight="25dp"
-            android:text="@string/word"
-            android:textSize="20sp" />
     </RelativeLayout>
 </LinearLayout>

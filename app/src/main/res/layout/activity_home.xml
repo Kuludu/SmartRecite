@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:padding="3dp"
+            android:padding="0sp"
             android:text="@string/wrongWords"
             android:textColor="@android:color/white"
             android:textSize="15sp"

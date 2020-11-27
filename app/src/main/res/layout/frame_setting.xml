@@ -18,6 +18,16 @@
             android:text="@string/openApp"
             android:textSize="17sp" />
 
+        <Spinner
+            android:id="@+id/spinner_open"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="150dp"
+            android:layout_weight="2"
+            android:background="@null" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -36,7 +46,7 @@
 
         <Spinner
             android:id="@+id/spinner_difficulty"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="28dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
@@ -63,7 +73,7 @@
             android:id="@+id/spinner_all_number"
             android:layout_width="0dp"
             android:layout_height="28dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="left"
             android:layout_marginRight="15dp"
             android:layout_weight="2"
             android:background="@null" />
@@ -91,7 +101,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_weight="2"
-            android:background="@null">
+            android:background="@null"
+            android:spinnerMode="dropdown">
 
         </Spinner>
     </LinearLayout>
@@ -134,6 +145,14 @@
             android:padding="10dp"
             android:text="@string/serverUrl"
             android:textSize="17sp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:padding="10dp"
+            android:textSize="17sp"
+            android:maxLines="1"
+            android:hint="请输入服务器地址"/>
 
     </LinearLayout>
 

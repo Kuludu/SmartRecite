@@ -14,7 +14,6 @@ public class HomeActivity extends AppCompatActivity {
     private StudyFragment studyFragment;
     private SettingFragment settingFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

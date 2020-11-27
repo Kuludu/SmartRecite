@@ -17,15 +17,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class StudyFragment extends Fragment {
-    private TextView difficultyText;
-    private TextView quoteEnglishText;
-    private TextView quoteChinaText;
-    private TextView alreadyStudyText;
-    private TextView alreadyMasterText;
-    private TextView wrongText;
+    private TextView difficultyText, quoteEnglishText, quoteChinaText, alreadyStudyText, alreadyMasterText, wrongText;
     private QuoteHelper quoteHelper;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +37,11 @@ public class StudyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frame_study, null);
         initControl(view);
         AssetsDatabaseManager.initManager(getActivity());
+
         return view;
     }
 
@@ -85,5 +80,4 @@ public class StudyFragment extends Fragment {
         wrongText = view.findViewById(R.id.wrong_text);
         quoteHelper = new QuoteHelper(getActivity());
     }
-
 }

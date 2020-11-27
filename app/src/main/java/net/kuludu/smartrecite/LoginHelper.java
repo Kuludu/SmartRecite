@@ -29,7 +29,6 @@ public class LoginHelper {
     private String username;
     private String password;
     private String token;
-    private Context context;
     private SharedPreferences sharedPreferences;
     private String server_url;
     private Handler login_handler;
@@ -40,7 +39,6 @@ public class LoginHelper {
     public LoginHelper(Context context, String username, String password) {
         this.username = username;
         this.password = password;
-        this.context = context;
 
         localWordFilePath = context.getFilesDir() + "/word.db";
         sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);

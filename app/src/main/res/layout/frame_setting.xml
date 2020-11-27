@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -18,15 +19,14 @@
             android:text="@string/openApp"
             android:textSize="17sp" />
 
-        <Spinner
-            android:id="@+id/spinner_open"
+        <Switch
+            android:id="@+id/on_lock_screen"
             android:layout_width="0dp"
-            android:layout_height="28dp"
+            android:layout_height="34dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="150dp"
-            android:layout_weight="2"
-            android:background="@null" />
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="2" />
 
     </LinearLayout>
 
@@ -36,6 +36,7 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,6 +62,7 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,68 +93,130 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="@string/newQuestions"
-            android:textSize="17sp" />
-
-        <Spinner
-            android:id="@+id/spinner_new_number"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="2"
-            android:background="@null"
-            android:spinnerMode="dropdown">
-
-        </Spinner>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/white"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:padding="10dp"
-            android:text="@string/reviewQuestions"
-            android:textSize="17sp" />
-
-        <Spinner
-            android:id="@+id/spinner_revise_number"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="2"
-            android:background="@null" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/white"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:padding="10dp"
             android:text="@string/serverUrl"
             android:textSize="17sp" />
+
         <EditText
+            android:id="@+id/et_server_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:hint="请输入服务器地址"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_server_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:text="保存" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:textSize="17sp"
+            android:text="用户名"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:hint="用户名"
             android:maxLines="1"
-            android:hint="请输入服务器地址"/>
+            android:padding="10dp"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:padding="10dp"
+            android:text="密码"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:hint="密码"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_user_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:text="保存" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:text="登录" />
+
+        <Button
+            android:id="@+id/fetch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:text="拉取" />
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:text="上传" />
 
     </LinearLayout>
 

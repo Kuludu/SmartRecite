@@ -65,9 +65,9 @@ public class StudyFragment extends Fragment {
         alreadyStudyText.setText(totalCount);
         String level = sharedPreferences.getString("level", "cet_4");
         if (level.equals("cet_4")) {
-            difficultyText.setText("四级难度");
+            difficultyText.setText(getString(R.string.cet4));
         } else if (level.equals("cet_6")) {
-            difficultyText.setText("六级难度");
+            difficultyText.setText(getString(R.string.cet6));
         }
     }
 

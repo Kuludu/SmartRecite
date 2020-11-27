@@ -102,7 +102,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
     public class SpinnerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         public void initAdapter() {
-            String[] arr_difficulty = {"四级难度", "六级难度"};
+            String[] arr_difficulty = {"CET-4", "CET-6"};
             String[] arr_allNumber = {"3", "5", "9", "12"};
 
             ArrayAdapter<String> adapter_difficulty = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arr_difficulty);

@@ -101,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="16"
-            android:hint="请输入服务器地址"
+            android:hint="@string/serverAddress"
             android:maxLines="1"
             android:padding="10dp"
             android:textSize="17sp" />
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:text="保存" />
+            android:text="@string/save" />
 
     </LinearLayout>
 
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="用户名"
+            android:text="@string/user"
             android:textSize="17sp" />
 
         <EditText
@@ -145,7 +145,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
-            android:hint="用户名"
+            android:hint="@string/user"
             android:maxLines="1"
             android:padding="10dp"
             android:textSize="17sp" />
@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:padding="10dp"
-            android:text="密码"
+            android:text="@string/pwd"
             android:textSize="17sp" />
 
         <EditText
@@ -172,7 +172,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:hint="密码"
+            android:hint="@string/pwd"
             android:maxLines="1"
             android:padding="10dp"
             android:textSize="17sp" />
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:text="保存" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/login"
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:text="登录" />
+            android:text="@string/signIn" />
 
         <Button
             android:id="@+id/fetch"
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:text="拉取" />
+            android:text="@string/pull" />
 
         <Button
             android:id="@+id/upload"
@@ -216,7 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:text="上传" />
+            android:text="@string/push" />
 
     </LinearLayout>
 

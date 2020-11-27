@@ -20,4 +20,16 @@
     <string name="masterWords">掌握单词</string>
     <string name="difficultyLearning">学习难度</string>
     <string name="totalStudy">总共学习</string>
+
+    <string name="mastered">已掌握</string>
+    <string name="unlocked">已解锁</string>
+    <string name="cet4">四级难度</string>
+    <string name="cet6">六级难度</string>
+    <string name="serverAddress">请输入服务器地址</string>
+    <string name="save">保存</string>
+    <string name="user">用户名</string>
+    <string name="pwd">密码</string>
+    <string name="signIn">登录</string>
+    <string name="pull">拉取</string>
+    <string name="push">上传</string>
 </resources>

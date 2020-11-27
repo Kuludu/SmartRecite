@@ -246,10 +246,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             x2 = event.getX();
             y2 = event.getY();
             if (x2 - x1 > 200) {
-                Toast.makeText(this, "已掌握", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.mastered), Toast.LENGTH_SHORT).show();
                 getNextWord();
             } else if (x1 - x2 > 200) {
-                Toast.makeText(this, "已解锁", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.unlocked), Toast.LENGTH_SHORT).show();
                 unlock();
             } else if (y1 - y2 > 200) {
                 changeBackground();

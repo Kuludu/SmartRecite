@@ -9,10 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -25,6 +23,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class LoginHelper {
     private String username;
@@ -79,23 +78,6 @@ public class LoginHelper {
                 if (msg.what == 0) {
                     Toast.makeText(context, "Fetch failed!", Toast.LENGTH_SHORT).show();
                 } else {
-                    try {
-                        byte[] buf = new byte[1024];
-                        InputStream is = (InputStream) msg.obj;
-                        FileOutputStream fos = new FileOutputStream(localWordFilePath);
-                        int len;
-
-                        while ((len = is.read(buf)) > 0) {
-                            fos.write(buf, 0, len);
-                        }
-
-                        is.close();
-                        fos.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     Toast.makeText(context, "Fetch success!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -142,20 +124,20 @@ public class LoginHelper {
         }
     }
 
-    public void push() {
+    public void upload() {
         if (token == null) {
             return;
         }
 
         try {
-            final String push_entry = server_url + "/api/push";
+            final String push_entry = server_url + "/api/upload";
             File localWordFile = new File(localWordFilePath);
             URL url = new URL(push_entry);
             OkHttpClient client = new OkHttpClient();
             MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
             RequestBody fileBody = RequestBody.create(localWordFile, MediaType.parse("db"));
             requestBody.addFormDataPart("token", token)
-                    .addFormDataPart("db", localWordFile.getName(), fileBody);
+                    .addFormDataPart("db", username + ".sqlite", fileBody);
             Request request = new Request.Builder()
                     .url(url)
                     .post(requestBody.build())
@@ -196,7 +178,7 @@ public class LoginHelper {
             URL url = new URL(fetch_entry);
             OkHttpClient client = new OkHttpClient();
             RequestBody requestBody = new FormBody.Builder()
-                    .add("username", token)
+                    .add("token", token)
                     .build();
             Request request = new Request.Builder()
                     .url(url)
@@ -213,10 +195,14 @@ public class LoginHelper {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    String resp = response.body().string();
+                    ResponseBody respBody = response.body();
+                    String resp = respBody.string();
                     Message message = new Message();
                     if (!resp.equals("Bad authentication.")) {
-                        message.obj = response.body().byteStream();
+                        FileOutputStream fos = new FileOutputStream(localWordFilePath);
+                        fos.write(resp.getBytes());
+                        fos.close();
+
                         message.what = 1;
                     } else {
                         message.what = 0;

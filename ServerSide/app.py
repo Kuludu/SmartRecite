@@ -4,7 +4,7 @@ from flask import Flask, current_app, request, send_from_directory, make_respons
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.urandom(24)
+app.config['SECRET_KEY'] = os.urandom(24)
 app.config['UPLOAD_FOLDER'] = os.getcwd() + "/userfile/"
 
 
@@ -27,8 +27,8 @@ def login():
         with open("users.json", 'r') as f:
             users = json.load(f)
 
-        for user in users["users"]:
-            if username == user["username"] and password == user["password"]:
+        for user in users['users']:
+            if username == user['username'] and password == user['password']:
                 serializer = Serializer(current_app.config["SECRET_KEY"], expires_in=2592000)
                 token = serializer.dumps({"id": username}).decode("utf8")
 
@@ -41,15 +41,15 @@ def login():
 def upload():
     token = request.form.get("token")
 
-    serializer = Serializer(current_app.config["SECRET_KEY"])
+    serializer = Serializer(current_app.config['SECRET_KEY'])
 
     try:
-        username = serializer.loads(token)
+        user = serializer.loads(token)
     except Exception:
         return "Bad authentication."
 
     db = request.files.get('db')
-    if db and (db.filename == username + ".sqlite"):
+    if db and (db.filename == user['id'] + ".sqlite"):
         db.save(os.path.join(app.config['UPLOAD_FOLDER'], db.filename))
 
         return "Successfully uploaded."
@@ -61,18 +61,18 @@ def upload():
 def fetch():
     token = request.form.get("token")
 
-    serializer = Serializer(current_app.config["SECRET_KEY"])
+    serializer = Serializer(current_app.config['SECRET_KEY'])
 
     try:
         user = serializer.loads(token)
     except Exception:
         return "Bad authentication."
 
-    response = make_response(send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), user["id"] + ".sqlite",
+    response = make_response(send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), user['id'] + ".sqlite",
                                                  as_attachment=True))
 
     return response
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

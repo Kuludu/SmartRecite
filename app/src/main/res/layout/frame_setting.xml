@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -14,7 +15,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="10dp"
             android:text="@string/openApp"
             android:textSize="17sp" />
@@ -22,17 +22,17 @@
         <Switch
             android:id="@+id/on_lock_screen"
             android:layout_width="0dp"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="150dp"
             android:layout_marginEnd="15dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -58,7 +58,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -83,7 +83,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -100,7 +100,7 @@
             android:id="@+id/et_server_url"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="16"
             android:hint="请输入服务器地址"
             android:maxLines="1"
             android:padding="10dp"
@@ -110,7 +110,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -127,7 +127,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -154,7 +154,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">

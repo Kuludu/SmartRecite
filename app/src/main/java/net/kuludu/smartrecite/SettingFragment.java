@@ -116,17 +116,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            String content = adapterView.getItemAtPosition(i).toString();
-            switch (adapterView.getId()) {
-                case R.id.spinner_difficulty:
-                    Toast.makeText(getActivity(), "您选择了" + content, Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.spinner_all_number:
-                    Toast.makeText(getActivity(), "您设置了需要解锁题的个数为" + content + "个", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
-            }
+
         }
 
         @Override

@@ -3,8 +3,8 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@mipmap/background_1">
+    android:background="@mipmap/background_1"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/time_text"
@@ -41,8 +41,8 @@
             android:id="@+id/play_voice"
             android:layout_width="27dp"
             android:layout_height="27dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="60dp"
             android:background="@mipmap/voice" />
 

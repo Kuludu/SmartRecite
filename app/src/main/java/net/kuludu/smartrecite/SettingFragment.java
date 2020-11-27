@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,6 +69,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         btn_fetch.setOnClickListener(this);
         btn_upload.setOnClickListener(this);
 
+        onLockScreen.setChecked(sharedPreferences.getBoolean("btnTf", false));
         et_serverUrl.setText(sharedPreferences.getString("server_url", ""));
         et_username.setText(sharedPreferences.getString("username", ""));
         et_password.setText(sharedPreferences.getString("password", ""));
@@ -100,9 +101,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public class SpinnerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private class SpinnerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         public void initAdapter() {
-            String[] arr_difficulty = {"CET-4", "CET-6"};
+            String[] arr_difficulty = {"cet_4", "cet_6"};
             String[] arr_allNumber = {"3", "5", "9", "12"};
 
             ArrayAdapter<String> adapter_difficulty = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arr_difficulty);
@@ -110,18 +111,41 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
 
             difficulty.setAdapter(adapter_difficulty);
             allNumber.setAdapter(adapter_allNumber);
+
             difficulty.setOnItemSelectedListener(this);
             allNumber.setOnItemSelectedListener(this);
+
+            setSpinnerItemSelectedByValue(difficulty, sharedPreferences.getString("level", "cet_4"));
+            setSpinnerItemSelectedByValue(allNumber, sharedPreferences.getString("unlock", "3"));
         }
 
         @Override
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+            String msg = adapterView.getSelectedItem().toString();
+            switch (adapterView.getId()) {
+                case R.id.spinner_difficulty:
+                    editor.putString("level", msg);
+                    break;
+                case R.id.spinner_all_number:
+                    editor.putString("unlock", msg);
+                    break;
+            }
+            editor.apply();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
 
+        }
+
+        public void setSpinnerItemSelectedByValue(Spinner spinner, String value) {
+            SpinnerAdapter spinnerAdapter = spinner.getAdapter();
+            int k = spinnerAdapter.getCount();
+            for (int i = 0; i < k; i++) {
+                if (value.equals(spinnerAdapter.getItem(i).toString())) {
+                    spinner.setSelection(i, true);
+                }
+            }
         }
     }
 }

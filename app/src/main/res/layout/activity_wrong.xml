@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@android:color/holo_blue_light"
         android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
@@ -35,6 +37,7 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_frame"
             android:padding="0dp"
+            android:text="Know"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
@@ -44,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:layout_marginTop="80dp">
+
         <TextView
             android:id="@+id/word_text"
             android:layout_width="wrap_content"

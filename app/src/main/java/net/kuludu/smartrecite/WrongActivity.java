@@ -1,27 +1,18 @@
 package net.kuludu.smartrecite;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Set;
 
 public class WrongActivity extends AppCompatActivity {
@@ -73,23 +64,15 @@ public class WrongActivity extends AppCompatActivity {
         Set<String> wrong= sharedPreferences.getStringSet("wrong",new LinkedHashSet<>());
         it = wrong.iterator();
 
-        nextWrong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try{
-                    it.remove();
-                    nextWrong();
-                }catch (IllegalStateException e){
-                    setFinalText();
-                }
+        nextWrong.setOnClickListener(view -> {
+            try{
+                it.remove();
+                nextWrong();
+            }catch (IllegalStateException e){
+                setFinalText();
             }
         });
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backBtn.setOnClickListener(view -> finish());
     }
 
     private void setText(Word word){

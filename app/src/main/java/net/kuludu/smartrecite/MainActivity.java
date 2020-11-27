@@ -1,10 +1,12 @@
 package net.kuludu.smartrecite;
 
 import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView timeText, dateText, wordText, englishText;
     private ImageView playVioce;
     private String mMonth, mDay, mWeek, mHours, mMinute;
-    private KeyguardManager km;
-    private KeyguardManager.KeyguardLock kl;
     private RadioGroup radioGroup;
     private RadioButton radioOne, radioTwo, radioThree;
     private WordHelper wordHelper;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private LinearLayout linearLayout;
+    private KeyguardManager km;
+    private KeyguardManager.KeyguardLock kl;
 
     int id;
     float x1 = 0;
@@ -46,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         initDatabaseHelper();
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int getNextWord() {
+        initTextColor();
         Word nextWord;
         Word prevWord;
 
@@ -163,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             radioTwo.setText("B:" + prevWord.getChinese());
             radioThree.setText("C:" + w.getChinese());
         }
-        initTextColor();
         return id;
     }
 
@@ -186,6 +190,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayout = findViewById(R.id.background);
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
+
+        km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        kl = km.newKeyguardLock("unlock");
+
         getNextWord();
     }
 
@@ -200,6 +208,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         radioGroup.setClickable(false);
+        radioOne.setClickable(false);
+        radioTwo.setClickable(false);
+        radioThree.setClickable(false);
         switch (checkedId) {
             case R.id.choose_btn_one:
                 String msg1 = radioOne.getText().toString().substring(2).trim();
@@ -214,20 +225,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnGetText(msg3, radioThree);
                 break;
         }
-        radioOne.setClickable(false);
-        radioTwo.setClickable(false);
-        radioThree.setClickable(false);
     }
 
     private void initTextColor() {
-        // init radio
         radioOne.setChecked(false);
         radioTwo.setChecked(false);
         radioThree.setChecked(false);
         radioOne.setClickable(true);
         radioTwo.setClickable(true);
         radioThree.setClickable(true);
-        // init text
+        radioGroup.setClickable(true);
+
         radioOne.setTextColor(Color.WHITE);
         radioTwo.setTextColor(Color.WHITE);
         radioThree.setTextColor(Color.WHITE);
@@ -261,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void unlock() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        kl.disableKeyguard();
+        finish();
     }
 
     private void changeBackground() {

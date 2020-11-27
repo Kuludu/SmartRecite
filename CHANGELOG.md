@@ -25,6 +25,17 @@ dwj 优化layout,动图，UI壁纸设计
 Kuludu 错题本,LoginHelper
 
 计划完成:
-- [ ] Coder_Liu: 锁屏功能实现
-- [ ] dwj: 设置界面的实现
-- [ ] Kuludu: 完成登录功能的实现
+- [x] Coder_Liu: 锁屏功能实现
+- [x] dwj: 设置界面的实现
+- [x] Kuludu: 完成登录功能的实现
+
+# 2020-11-26
+- 今日完成
+Coder_Liu 完成了广播监听的功能
+dwj 优化layout,国际化，下拉框的完成
+Kuludu SettingFragment完成，登录功能完成
+
+计划完成:
+- [ ] Coder_Liu: 修改锁屏Bug
+- [ ] dwj: 优化layout
+- [ ] Kuludu: 完成SettingFragment功能实装

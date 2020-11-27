@@ -11,7 +11,6 @@
         android:background="@android:color/holo_blue_light">
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -24,15 +23,16 @@
             android:id="@+id/wrong_btn"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/btn_frame"
             android:onClick="wrong"
             android:padding="0sp"
             android:text="@string/wrongWords"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
+
     </RelativeLayout>
 
     <FrameLayout
@@ -52,7 +52,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
             android:onClick="review"
@@ -69,5 +69,7 @@
             android:onClick="setting"
             android:text="@string/setUp"
             android:textColor="#FFFFFF" />
+
     </LinearLayout>
+
 </RelativeLayout>

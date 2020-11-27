@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -19,7 +18,6 @@
             android:text="@string/openApp"
             android:textSize="17sp" />
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -28,7 +26,6 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,9 +41,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_weight="2"
-            android:background="@null">
+            android:background="@null" />
 
-        </Spinner>
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +51,6 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,9 +66,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_weight="2"
-            android:background="@null">
-        </Spinner>
+            android:background="@null" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -107,7 +102,6 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -123,9 +117,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:layout_weight="2"
-            android:background="@null">
+            android:background="@null" />
 
-        </Spinner>
     </LinearLayout>
 
     <LinearLayout
@@ -134,7 +127,6 @@
         android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -143,7 +135,6 @@
             android:text="@string/serverUrl"
             android:textSize="17sp" />
 
-
-
     </LinearLayout>
+
 </LinearLayout>

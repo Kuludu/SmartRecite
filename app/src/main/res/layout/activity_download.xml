@@ -18,7 +18,7 @@
         android:id="@+id/load_pl"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
         android:alpha="0.8"
         android:src="@mipmap/loading" />
 

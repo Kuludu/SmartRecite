@@ -45,7 +45,6 @@ public class DownloadActivity extends AppCompatActivity {
                 super.handleMessage(msg);
 
                 count++;
-                Log.i("DB", count.toString());
 
                 if (count >= 2) {
                     Toast.makeText(DownloadActivity.this, "Download complete!", Toast.LENGTH_SHORT).show();

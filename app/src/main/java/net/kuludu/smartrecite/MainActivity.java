@@ -178,12 +178,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateText = findViewById(R.id.date_text);
         wordText = findViewById(R.id.word_text);
         englishText = findViewById(R.id.english_text);
-        playVioce = findViewById(R.id.play_vioce);
+        playVioce = findViewById(R.id.play_voice);
         radioGroup = findViewById(R.id.choose_group);
         radioOne = findViewById(R.id.choose_btn_one);
         radioTwo = findViewById(R.id.choose_btn_two);
         radioThree = findViewById(R.id.choose_btn_three);
-        linearLayout = findViewById(R.id.backgroung);
+        linearLayout = findViewById(R.id.background);
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
         getNextWord();
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.play_vioce:
+            case R.id.play_voice:
                 break;
         }
     }

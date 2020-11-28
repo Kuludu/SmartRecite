@@ -17,14 +17,10 @@ import java.util.Set;
 public class WordHelper {
     private String localWordFilePath;
     private File localDatabaseFile;
-    private String level;
-    private Context context;
     private SharedPreferences sharedPreferences;
 
     public WordHelper(Context context) {
         sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        level = sharedPreferences.getString("level", "");
-        this.context = context;
         localWordFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
         localDatabaseFile = new File(localWordFilePath);
     }
@@ -47,10 +43,8 @@ public class WordHelper {
 
     public Integer getWordsCount() {
         SQLiteDatabase db = openDatabase();
-
-        if (db == null) {
-            return null;
-        }
+        assert db != null;
+        String level = sharedPreferences.getString("level", "cet_4");
 
         Cursor cursor = db.query(level, new String[]{"COUNT(*)"}, null, null, null, null, null);
         cursor.moveToFirst();
@@ -65,10 +59,8 @@ public class WordHelper {
     public List<Word> getWords() {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
-
-        if (db == null) {
-            return null;
-        }
+        assert db != null;
+        String level = sharedPreferences.getString("level", "cet_4");
 
         Cursor cursor = db.query(level, null, null, null, null, null, null);
         if (cursor.getCount() > 0) {
@@ -90,11 +82,9 @@ public class WordHelper {
     public List<Word> getRandXWords(int requireNum) {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
+        assert db != null;
         Cursor cursor;
-
-        if (db == null) {
-            return null;
-        }
+        String level = sharedPreferences.getString("level", "cet_4");
 
         int totalWordCount = getWordsCount();
         boolean isWordCountExceed = false;
@@ -127,10 +117,8 @@ public class WordHelper {
 
     public Word getXWord(Integer index) {
         SQLiteDatabase db = openDatabase();
-
-        if (db == null) {
-            return null;
-        }
+        assert db != null;
+        String level = sharedPreferences.getString("level", "cet_4");
 
         Cursor cursor = db.query(level, null, "`index`=?", new String[]{index.toString()}, null, null, null);
 
@@ -152,10 +140,8 @@ public class WordHelper {
 
     public int setLastReview(Integer lastReview, Integer id) {
         SQLiteDatabase db = openDatabase();
-
-        if (db == null) {
-            return 0;
-        }
+        assert db != null;
+        String level = sharedPreferences.getString("level", "cet_4");
 
         ContentValues cv = new ContentValues();
         cv.put("last_review", lastReview);
@@ -170,8 +156,10 @@ public class WordHelper {
     public List<Word> getLearnedWord() {
         List<Word> result = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
+        assert db != null;
+        String level = sharedPreferences.getString("level", "cet_4");
 
-        Cursor cursor = db.query(level, null, "last_review", new String[]{"IS NOT NULL"}, "last_review", null, null, null);
+        Cursor cursor = db.query(level, null, "last_review IS NOT NULL", null, "last_review", null, null, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));

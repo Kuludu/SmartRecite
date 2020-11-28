@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -124,6 +126,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             String msg = adapterView.getSelectedItem().toString();
             switch (adapterView.getId()) {
                 case R.id.spinner_difficulty:
+                    if (!sharedPreferences.getString("level", "cet_4").equals(msg)) {
+                        editor.remove("right");
+                        editor.remove("wrong");
+                    }
                     editor.putString("level", msg);
                     break;
                 case R.id.spinner_all_number:

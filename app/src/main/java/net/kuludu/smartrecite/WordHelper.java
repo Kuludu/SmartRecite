@@ -160,6 +160,31 @@ public class WordHelper {
         ContentValues cv = new ContentValues();
         cv.put("last_review", lastReview);
 
-        return db.update(level, cv, "`index`=?", new String[]{id.toString()});
+        int state = db.update(level, cv, "`index`=?", new String[]{id.toString()});
+
+        db.close();
+
+        return state;
+    }
+
+    public List<Word> getLearnedWord() {
+        List<Word> result = new ArrayList<>();
+        SQLiteDatabase db = openDatabase();
+
+        Cursor cursor = db.query(level, null, "last_review", new String[]{"IS NOT NULL"}, "last_review", null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            result.add(word);
+        }
+        while (cursor.moveToNext()) {
+            Word word = new Word(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            result.add(word);
+        }
+
+        cursor.close();
+        db.close();
+
+        return result;
     }
 }

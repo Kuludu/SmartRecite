@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private KeyguardManager.KeyguardLock kl;
 
     int id;
+    int wordCount;
     float x1 = 0;
     float y1 = 0;
     float x2 = 0;
@@ -130,6 +131,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int getNextWord() {
+        wordCount--;
+        if(wordCount == -1){
+            unlock();
+            finish();
+        }
         initTextColor();
         Word nextWord;
         Word prevWord;
@@ -150,8 +156,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             nextWord = wordHelper.getXWord(id + 1);
             prevWord = wordHelper.getXWord(id - 1);
         }
-
-
         Random r = new Random();
         int random = r.nextInt(3);
         if (random == 0) {
@@ -192,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         kl = km.newKeyguardLock("unlock");
-
+        wordCount = Integer.parseInt(sharedPreferences.getString("unlock","3"));
         getNextWord();
     }
 

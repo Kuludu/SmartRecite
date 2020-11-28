@@ -270,6 +270,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         kl.disableKeyguard();
         finish();
+        editor.putBoolean("tf",false);
+        editor.apply();
     }
 
     private void changeBackground() {

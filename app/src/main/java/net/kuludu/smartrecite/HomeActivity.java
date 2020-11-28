@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         screenListener.begin(new ScreenStateListener() {
             @Override
             public void onScreenOn() {
-                Log.i("---->","唤醒成功");
                 if(sharedPreferences.getBoolean("btnTf",false)){
                     if(sharedPreferences.getBoolean("tf",false)){
                         Intent intent = new Intent(HomeActivity.this,MainActivity.class);
@@ -47,7 +46,6 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onScreenOff() {
-                Log.i("---->","屏幕锁屏成功");
                 editor.putBoolean("tf",true);
                 editor.commit();
                 // TODO: destroy
@@ -55,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onUnLock() {
-                Log.i("---->","屏幕成功解锁");
                 editor.putBoolean("tf",false);
                 editor.commit();
             }

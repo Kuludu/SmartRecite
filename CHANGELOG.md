@@ -29,13 +29,19 @@ Kuludu 错题本,LoginHelper
 - [x] dwj: 设置界面的实现
 - [x] Kuludu: 完成登录功能的实现
 
-# 2020-11-26
+# 2020-11-27
 - 今日完成
 Coder_Liu 完成了广播监听的功能
 dwj 优化layout,国际化，下拉框的完成
 Kuludu SettingFragment完成，登录功能完成
 
 计划完成:
-- [ ] Coder_Liu: 修改锁屏Bug
-- [ ] dwj: 优化layout
-- [ ] Kuludu: 完成SettingFragment功能实装
+- [x] Coder_Liu: 修改锁屏Bug
+- [x] dwj: 优化layout
+- [x] Kuludu: 完成SettingFragment功能实装
+
+# 2020-11-28
+- 今日完成
+Coder_Liu: 修改锁屏Bug
+dwj: 优化layout
+Kuludu: 完成SettingFragment功能实装

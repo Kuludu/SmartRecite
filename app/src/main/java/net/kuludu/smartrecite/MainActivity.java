@@ -128,11 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wrong.add(word.getIndex().toString());
         editor.putStringSet("right", wrong);
         editor.apply();
+        wordHelper.setLastReview(word.getLast_review() + 1, word.getIndex());
+        word.setLast_review(word.getLast_review() + 1);
     }
 
     private int getNextWord() {
         wordCount--;
-        if(wordCount == -1){
+        if (wordCount == -1) {
             unlock();
             finish();
         }
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         kl = km.newKeyguardLock("unlock");
-        wordCount = Integer.parseInt(sharedPreferences.getString("unlock","3"));
+        wordCount = Integer.parseInt(sharedPreferences.getString("unlock", "3"));
         getNextWord();
     }
 
@@ -274,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         kl.disableKeyguard();
         finish();
-        editor.putBoolean("tf",false);
+        editor.putBoolean("tf", false);
         editor.apply();
     }
 

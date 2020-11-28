@@ -18,6 +18,7 @@ public class StudyFragment extends Fragment {
     private TextView difficultyText, quoteEnglishText, quoteChinaText, alreadyStudyText, alreadyMasterText, wrongText;
     private QuoteHelper quoteHelper;
     private SharedPreferences sharedPreferences;
+    private WordHelper wordHelper;
     SharedPreferences.Editor editor;
 
     @Override
@@ -51,14 +52,12 @@ public class StudyFragment extends Fragment {
         quoteChinaText.setText(quoteChinese);
 
         Set<String> wrong = sharedPreferences.getStringSet("wrong", new HashSet<>());
-        String wrongCount = String.valueOf(wrong.size());
-        wrongText.setText(wrongCount);
+        int wrongCount = wrong.size();
+        wrongText.setText(wrongCount + "");
+        int rightCount = wordHelper.getLearnedWord().size();
+        alreadyMasterText.setText(rightCount+"");
 
-        Set<String> right = sharedPreferences.getStringSet("right", new HashSet<>());
-        String rightCount = String.valueOf(right.size());
-        alreadyMasterText.setText(rightCount);
-
-        String totalCount = String.valueOf(wrong.size() + right.size());
+        String totalCount = String.valueOf(wrongCount + rightCount);
 
         alreadyStudyText.setText(totalCount);
         String level = sharedPreferences.getString("level", "cet_4");
@@ -76,6 +75,7 @@ public class StudyFragment extends Fragment {
         alreadyStudyText = view.findViewById(R.id.already_study);
         alreadyMasterText = view.findViewById(R.id.already_mastered);
         wrongText = view.findViewById(R.id.wrong_text);
+        wordHelper = new WordHelper(getActivity());
         quoteHelper = new QuoteHelper(getActivity());
     }
 }

@@ -133,7 +133,7 @@ public class LoginHelper {
             URL url = new URL(push_entry);
             OkHttpClient client = new OkHttpClient();
             MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-            RequestBody fileBody = RequestBody.create(localWordFile, MediaType.parse("db"));
+            RequestBody fileBody = RequestBody.create(localWordFile, MediaType.parse("application/octet-stream"));
             requestBody.addFormDataPart("token", token)
                     .addFormDataPart("db", username + ".sqlite", fileBody);
             Request request = new Request.Builder()

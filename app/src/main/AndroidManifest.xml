@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WrongActivity" />
+        <activity android:name=".RightActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
     </application>

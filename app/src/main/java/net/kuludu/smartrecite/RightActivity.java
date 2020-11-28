@@ -13,9 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
-public class WrongActivity extends AppCompatActivity {
+public class RightActivity extends AppCompatActivity {
     private Button nextWrong;
     private ImageButton backBtn;
     private TextView chinaText, wordText, englishText;
@@ -59,21 +60,11 @@ public class WrongActivity extends AppCompatActivity {
         nextWrong = findViewById(R.id.i_know_btn);
         backBtn = findViewById(R.id.back_btn);
         playVoice = findViewById(R.id.play_voice);
-        nextWrong.setVisibility(View.VISIBLE);
-
         wordHelper = new WordHelper(this);
-        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
-        Set<String> wrong = sharedPreferences.getStringSet("wrong", new LinkedHashSet<>());
-        it = wrong.iterator();
 
-        nextWrong.setOnClickListener(view -> {
-            try {
-                it.remove();
-                nextWrong();
-            } catch (IllegalStateException e) {
-                setFinalText();
-            }
-        });
+        nextWrong.setVisibility(View.INVISIBLE);
+        List<Word> right = wordHelper.getLearnedWord();
+        it = right.iterator();
         backBtn.setOnClickListener(view -> finish());
     }
 
@@ -85,7 +76,7 @@ public class WrongActivity extends AppCompatActivity {
     }
 
     private void setFinalText() {
-        chinaText.setText("复习错题完毕！");
+        chinaText.setText("复习完毕！");
         wordText.setText("");
         englishText.setText("");
         playVoice.setVisibility(View.INVISIBLE);
@@ -93,8 +84,7 @@ public class WrongActivity extends AppCompatActivity {
 
     private void nextWrong() {
         if (it.hasNext()) {
-            String wordIndex = (String) it.next();
-            Word word = wordHelper.getXWord(Integer.parseInt(wordIndex));
+            Word word = (Word) it.next();
             setText(word);
         } else {
             setFinalText();

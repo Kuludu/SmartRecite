@@ -1,15 +1,13 @@
 package net.kuludu.smartrecite;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
@@ -27,18 +25,19 @@ public class HomeActivity extends AppCompatActivity {
         initControl();
         review(getWindow().getDecorView());
     }
-    private void initControl(){
+
+    private void initControl() {
         studyFragment = new StudyFragment();
         settingFragment = new SettingFragment();
-        sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         screenListener = new ScreenListener(this);
         screenListener.begin(new ScreenStateListener() {
             @Override
             public void onScreenOn() {
-                if(sharedPreferences.getBoolean("btnTf",false)){
-                    if(sharedPreferences.getBoolean("tf",false)){
-                        Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+                if (sharedPreferences.getBoolean("btnTf", false)) {
+                    if (sharedPreferences.getBoolean("tf", false)) {
+                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -46,18 +45,19 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onScreenOff() {
-                editor.putBoolean("tf",true);
+                editor.putBoolean("tf", true);
                 editor.commit();
                 // TODO: destroy
             }
 
             @Override
             public void onUnLock() {
-                editor.putBoolean("tf",false);
+                editor.putBoolean("tf", false);
                 editor.commit();
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -80,6 +80,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void wrong(View v) {
         Intent intent = new Intent(this, WrongActivity.class);
+        startActivity(intent);
+    }
+
+    public void reviewWord(View v) {
+        Intent intent = new Intent(this, RightActivity.class);
         startActivity(intent);
     }
 }

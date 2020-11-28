@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    private FragmentTransaction transaction;
     private StudyFragment studyFragment;
     private SettingFragment settingFragment;
     private ScreenListener screenListener;
@@ -46,13 +45,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onScreenOff() {
                 editor.putBoolean("tf", true);
-                editor.commit();
+                editor.apply();
             }
 
             @Override
             public void onUnLock() {
                 editor.putBoolean("tf", false);
-                editor.commit();
+                editor.apply();
             }
         });
     }
@@ -64,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void setStudyFragment(Fragment fragment) {
-        transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();
     }

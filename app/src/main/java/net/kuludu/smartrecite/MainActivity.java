@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void changeBackground() {
         Random random = new Random();
         int index = random.nextInt(5);
-        List<Integer> backgrounds = new ArrayList<Integer>();
+        List<Integer> backgrounds = new ArrayList<>();
         backgrounds.add(R.mipmap.background_1);
         backgrounds.add(R.mipmap.background_2);
         backgrounds.add(R.mipmap.background_3);

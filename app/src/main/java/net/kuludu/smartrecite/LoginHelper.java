@@ -8,11 +8,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -97,15 +100,15 @@ public class LoginHelper {
             Call call = client.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     Message message = new Message();
                     message.what = 0;
                     login_handler.sendMessage(message);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String resp = response.body().string();
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    String resp = Objects.requireNonNull(response.body()).string();
                     Message message = new Message();
                     if (!resp.equals("Bad authentication.")) {
                         message.obj = resp;
@@ -142,15 +145,15 @@ public class LoginHelper {
             Call call = client.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     Message message = new Message();
                     message.what = 0;
                     push_handler.sendMessage(message);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String resp = response.body().string();
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    String resp = Objects.requireNonNull(response.body()).string();
                     Message message = new Message();
                     if (resp.equals("Successfully uploaded.")) {
                         message.what = 1;
@@ -184,15 +187,15 @@ public class LoginHelper {
             Call call = client.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     Message message = new Message();
                     message.what = 0;
                     fetch_handler.sendMessage(message);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    byte[] resp = response.body().bytes();
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    byte[] resp = Objects.requireNonNull(response.body()).bytes();
                     String respString = new String(resp);
                     Message message = new Message();
                     if (!respString.equals("Bad authentication.")) {

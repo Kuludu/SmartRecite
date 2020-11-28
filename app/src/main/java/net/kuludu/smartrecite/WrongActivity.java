@@ -16,10 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class WrongActivity extends AppCompatActivity {
-    private Button nextWrong;
-    private ImageButton backBtn;
     private TextView chinaText, wordText, englishText;
-    private SharedPreferences sharedPreferences;
     private WordHelper wordHelper;
     private ImageView playVoice;
     Iterator it;
@@ -56,13 +53,13 @@ public class WrongActivity extends AppCompatActivity {
         chinaText = findViewById(R.id.china_text);
         wordText = findViewById(R.id.word_text);
         englishText = findViewById(R.id.english_text);
-        nextWrong = findViewById(R.id.i_know_btn);
-        backBtn = findViewById(R.id.back_btn);
+        Button nextWrong = findViewById(R.id.i_know_btn);
+        ImageButton backBtn = findViewById(R.id.back_btn);
         playVoice = findViewById(R.id.play_voice);
         nextWrong.setVisibility(View.VISIBLE);
 
         wordHelper = new WordHelper(this);
-        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
         Set<String> wrong = sharedPreferences.getStringSet("wrong", new LinkedHashSet<>());
         it = wrong.iterator();
 

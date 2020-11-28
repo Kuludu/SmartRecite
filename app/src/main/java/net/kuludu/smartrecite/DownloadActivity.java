@@ -10,10 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -116,13 +119,13 @@ public class DownloadActivity extends AppCompatActivity {
             Call call = client.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     Toast.makeText(DownloadActivity.this, "Download failed", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    byte[] buf = response.body().bytes();
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    byte[] buf = Objects.requireNonNull(response.body()).bytes();
                     FileOutputStream fos = new FileOutputStream(local_path);
                     fos.write(buf, 0, buf.length);
 

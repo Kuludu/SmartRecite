@@ -1,6 +1,5 @@
 package net.kuludu.smartrecite;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,11 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RightActivity extends AppCompatActivity {
-    private Button nextWrong;
-    private ImageButton backBtn;
     private TextView chinaText, wordText, englishText;
-    private SharedPreferences sharedPreferences;
-    private WordHelper wordHelper;
     private ImageView playVoice;
     Iterator it;
     float x1 = 0;
@@ -55,10 +50,10 @@ public class RightActivity extends AppCompatActivity {
         chinaText = findViewById(R.id.china_text);
         wordText = findViewById(R.id.word_text);
         englishText = findViewById(R.id.english_text);
-        nextWrong = findViewById(R.id.i_know_btn);
-        backBtn = findViewById(R.id.back_btn);
+        Button nextWrong = findViewById(R.id.i_know_btn);
+        ImageButton backBtn = findViewById(R.id.back_btn);
         playVoice = findViewById(R.id.play_voice);
-        wordHelper = new WordHelper(this);
+        WordHelper wordHelper = new WordHelper(this);
 
         nextWrong.setVisibility(View.INVISIBLE);
         List<Word> right = wordHelper.getLearnedWord();

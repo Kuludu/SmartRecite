@@ -193,12 +193,12 @@ public class LoginHelper {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    ResponseBody respBody = response.body();
-                    String resp = respBody.string();
+                    byte[] resp = response.body().bytes();
+                    String respString = new String(resp);
                     Message message = new Message();
-                    if (!resp.equals("Bad authentication.")) {
+                    if (!respString.equals("Bad authentication.")) {
                         FileOutputStream fos = new FileOutputStream(localWordFilePath);
-                        fos.write(resp.getBytes());
+                        fos.write(resp);
                         fos.close();
 
                         message.what = 1;

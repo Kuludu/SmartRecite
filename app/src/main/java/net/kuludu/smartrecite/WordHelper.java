@@ -132,8 +132,8 @@ public class WordHelper {
             return word;
         }
 
-        db.close();
         cursor.close();
+        db.close();
 
         return null;
     }

@@ -55,7 +55,7 @@ public class StudyFragment extends Fragment {
         int wrongCount = wrong.size();
         wrongText.setText(wrongCount + "");
         int rightCount = wordHelper.getLearnedWord().size();
-        alreadyMasterText.setText(rightCount+"");
+        alreadyMasterText.setText(rightCount + "");
 
         String totalCount = String.valueOf(wrongCount + rightCount);
 

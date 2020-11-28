@@ -21,10 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.assetsbasedata.AssetsDatabaseManager;
 
 public class SettingFragment extends Fragment implements View.OnClickListener {
-    private Switch onLockScreen;
     private Spinner difficulty, allNumber;
     private EditText et_serverUrl, et_username, et_password;
-    private Button btn_saveServerUrl, btn_saveUserPwd, btn_login, btn_fetch, btn_upload;
     private LoginHelper loginHelper;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -48,17 +46,17 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        onLockScreen = view.findViewById(R.id.on_lock_screen);
+        Switch onLockScreen = view.findViewById(R.id.on_lock_screen);
         difficulty = view.findViewById(R.id.spinner_difficulty);
         allNumber = view.findViewById(R.id.spinner_all_number);
         et_serverUrl = view.findViewById(R.id.et_server_url);
         et_username = view.findViewById(R.id.et_username);
         et_password = view.findViewById(R.id.et_password);
-        btn_saveServerUrl = view.findViewById(R.id.save_server_url);
-        btn_saveUserPwd = view.findViewById(R.id.save_user_pwd);
-        btn_login = view.findViewById(R.id.login);
-        btn_fetch = view.findViewById(R.id.fetch);
-        btn_upload = view.findViewById(R.id.upload);
+        Button btn_saveServerUrl = view.findViewById(R.id.save_server_url);
+        Button btn_saveUserPwd = view.findViewById(R.id.save_user_pwd);
+        Button btn_login = view.findViewById(R.id.login);
+        Button btn_fetch = view.findViewById(R.id.fetch);
+        Button btn_upload = view.findViewById(R.id.upload);
 
         onLockScreen.setOnCheckedChangeListener((buttonView, isChecked) -> {
             editor.putBoolean("btnTf", isChecked);
@@ -96,12 +94,14 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             case R.id.fetch:
                 if (loginHelper == null) {
                     Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 loginHelper.fetch();
                 break;
             case R.id.upload:
                 if (loginHelper == null) {
                     Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 loginHelper.upload();
                 break;

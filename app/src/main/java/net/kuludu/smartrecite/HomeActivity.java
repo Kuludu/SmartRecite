@@ -47,7 +47,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onScreenOff() {
                 editor.putBoolean("tf", true);
                 editor.commit();
-                // TODO: destroy
             }
 
             @Override

@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,9 +94,17 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                         et_password.getText().toString());
                 loginHelper.login();
             case R.id.fetch:
+                if (loginHelper == null) {
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 loginHelper.fetch();
                 break;
             case R.id.upload:
+                if (loginHelper == null) {
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 loginHelper.upload();
                 break;
         }

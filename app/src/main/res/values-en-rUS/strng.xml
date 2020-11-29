@@ -7,7 +7,8 @@
     <string name="download_quote">Download famous words</string>
 
     <string name="wrongWords">Wrong</string>
-    <string name="review">Review</string>
+    <string name="reviewWords">Review</string>
+    <string name="review">Home</string>
     <string name="setUp">Settings</string>
 
     <string name="openApp">Open SmartRecite</string>

@@ -7,7 +7,8 @@
     <string name="download_quote">名言库下载</string>
 
     <string name="wrongWords">错词本</string>
-    <string name="review">复习</string>
+    <string name="reviewWords">复习本</string>
+    <string name="review">主页</string>
     <string name="setUp">设置</string>
 
     <string name="openApp">开启单词锁屏</string>

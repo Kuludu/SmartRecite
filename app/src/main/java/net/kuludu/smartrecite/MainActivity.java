@@ -29,15 +29,12 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private TextView timeText, dateText, wordText, englishText;
-    private ImageView playVioce;
-    private String mMonth, mDay, mWeek, mHours, mMinute;
     private RadioGroup radioGroup;
     private RadioButton radioOne, radioTwo, radioThree;
     private WordHelper wordHelper;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private LinearLayout linearLayout;
-    private KeyguardManager km;
     private KeyguardManager.KeyguardLock kl;
     private TextToSpeech textToSpeech;
 
@@ -66,17 +63,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         // get system calendar
         Calendar calendar = Calendar.getInstance();
-        mMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
-        mDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-        mWeek = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
+        String mMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+        String mDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+        String mWeek = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
 
 
+        String mHours;
         if (calendar.get(Calendar.HOUR_OF_DAY) < 10) {
             mHours = "0" + calendar.get(Calendar.HOUR_OF_DAY);
         } else {
             mHours = "" + calendar.get(Calendar.HOUR_OF_DAY);
         }
 
+        String mMinute;
         if (calendar.get(Calendar.MINUTE) < 10) {
             mMinute = "0" + calendar.get(Calendar.MINUTE);
         } else {
@@ -135,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         word.setLast_review(word.getLast_review() + 1);
     }
 
-    private int getNextWord() {
+    private void getNextWord() {
         wordCount--;
         if (wordCount == -1) {
             unlock();
@@ -176,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             radioTwo.setText("B:" + prevWord.getChinese());
             radioThree.setText("C:" + w.getChinese());
         }
-        return id;
     }
 
     private void initDatabaseHelper() {
@@ -190,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateText = findViewById(R.id.date_text);
         wordText = findViewById(R.id.word_text);
         englishText = findViewById(R.id.english_text);
-        playVioce = findViewById(R.id.play_voice);
+        ImageView playVioce = findViewById(R.id.play_voice);
         radioGroup = findViewById(R.id.choose_group);
         radioOne = findViewById(R.id.choose_btn_one);
         radioTwo = findViewById(R.id.choose_btn_two);
@@ -199,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioGroup.setOnCheckedChangeListener(this);
         playVioce.setOnClickListener(this);
 
-        km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         kl = km.newKeyguardLock("unlock");
         wordCount = Integer.parseInt(sharedPreferences.getString("unlock", "3"));
         getNextWord();

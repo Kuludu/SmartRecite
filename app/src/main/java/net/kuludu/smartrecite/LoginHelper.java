@@ -31,7 +31,6 @@ public class LoginHelper {
     private String username;
     private String password;
     private String token;
-    private SharedPreferences sharedPreferences;
     private String server_url;
     private Handler login_handler;
     private Handler push_handler;
@@ -43,7 +42,7 @@ public class LoginHelper {
         this.password = password;
 
         localWordFilePath = context.getFilesDir() + "/word.db";
-        sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         server_url = sharedPreferences.getString("server_url", "");
         login_handler = new Handler() {
             @Override

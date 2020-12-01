@@ -15,13 +15,12 @@ import java.util.Random;
 import java.util.Set;
 
 public class WordHelper {
-    private String localWordFilePath;
     private File localDatabaseFile;
     private SharedPreferences sharedPreferences;
 
     public WordHelper(Context context) {
         sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        localWordFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
+        String localWordFilePath = context.getApplicationContext().getFilesDir() + "/word.db";
         localDatabaseFile = new File(localWordFilePath);
     }
 

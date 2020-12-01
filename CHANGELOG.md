@@ -9,9 +9,9 @@
 
 # 2020-11-25
 - 今日完成
-Coder_Liu 同步时间，单词切换的功能,左右滑功能完成
-dwj 去掉标题栏，全屏显示，layout国际化
-Kuludu 更新单词解析,完成名言解析
+- Coder_Liu 同步时间，单词切换的功能,左右滑功能完成
+- dwj 去掉标题栏，全屏显示，layout国际化
+- Kuludu 更新单词解析,完成名言解析
 
 计划完成:
 - [x] Coder_Liu: 完成HomeActivity的后端实现
@@ -20,9 +20,12 @@ Kuludu 更新单词解析,完成名言解析
 
 # 2020-11-26
 - 今日完成
-Coder_Liu 完成HomeActivity的后端实现,完成了StudyFragment
-dwj 优化layout,动图，UI壁纸设计
-Kuludu 错题本,LoginHelper
+- Coder_Liu 完成HomeActivity的后端实现,完成了StudyFragment
+- dwj 优化layout,动图，UI壁纸设计
+- Kuludu 错题本,LoginHelper
+
+# 2020-12-1
+- 项目完工
 
 计划完成:
 - [x] Coder_Liu: 锁屏功能实现

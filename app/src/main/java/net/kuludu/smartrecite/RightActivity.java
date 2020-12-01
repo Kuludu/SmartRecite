@@ -1,21 +1,25 @@
 package net.kuludu.smartrecite;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class RightActivity extends AppCompatActivity {
     private TextView chinaText, wordText, englishText;
     private ImageView playVoice;
+    private TextToSpeech textToSpeech;
     Iterator it;
     float x1 = 0;
     float y1 = 0;
@@ -59,6 +63,25 @@ public class RightActivity extends AppCompatActivity {
         List<Word> right = wordHelper.getLearnedWord();
         it = right.iterator();
         backBtn.setOnClickListener(view -> finish());
+
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i == TextToSpeech.SUCCESS) {
+                    textToSpeech.setLanguage(Locale.US);
+                    textToSpeech.setSpeechRate(1.5f);
+                } else {
+                    Toast.makeText(RightActivity.this, "语言功能初始化失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        playVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = wordText.getText().toString();
+                textToSpeech.speak(content, TextToSpeech.QUEUE_ADD, null);
+            }
+        });
     }
 
     private void setText(Word word) {

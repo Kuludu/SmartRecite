@@ -208,8 +208,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onInit(int i) {
                 if (i == TextToSpeech.SUCCESS) {
                     textToSpeech.setLanguage(Locale.US);
+                    textToSpeech.setSpeechRate(1.5f);
                 } else {
-                    Toast.makeText(MainActivity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "语言功能初始化失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });

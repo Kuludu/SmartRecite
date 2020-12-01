@@ -2,23 +2,27 @@ package net.kuludu.smartrecite;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class WrongActivity extends AppCompatActivity {
     private TextView chinaText, wordText, englishText;
     private WordHelper wordHelper;
     private ImageView playVoice;
+    private TextToSpeech textToSpeech;
     Iterator it;
     float x1 = 0;
     float y1 = 0;
@@ -62,7 +66,6 @@ public class WrongActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
         Set<String> wrong = sharedPreferences.getStringSet("wrong", new LinkedHashSet<>());
         it = wrong.iterator();
-
         nextWrong.setOnClickListener(view -> {
             try {
                 it.remove();
@@ -72,6 +75,25 @@ public class WrongActivity extends AppCompatActivity {
             }
         });
         backBtn.setOnClickListener(view -> finish());
+
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i == TextToSpeech.SUCCESS) {
+                    textToSpeech.setLanguage(Locale.US);
+                    textToSpeech.setSpeechRate(1.5f);
+                } else {
+                    Toast.makeText(WrongActivity.this, "语言功能初始化失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        playVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = wordText.getText().toString();
+                textToSpeech.speak(content, TextToSpeech.QUEUE_ADD, null);
+            }
+        });
     }
 
     private void setText(Word word) {

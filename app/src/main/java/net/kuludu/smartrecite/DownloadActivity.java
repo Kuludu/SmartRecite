@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
@@ -120,7 +121,9 @@ public class DownloadActivity extends AppCompatActivity {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    Looper.prepare();
                     Toast.makeText(DownloadActivity.this, "Download failed", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 }
 
                 @Override

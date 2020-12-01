@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout linearLayout;
     private KeyguardManager km;
     private KeyguardManager.KeyguardLock kl;
+    private TextToSpeech textToSpeech;
 
     int id;
     int wordCount;
@@ -200,12 +203,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kl = km.newKeyguardLock("unlock");
         wordCount = Integer.parseInt(sharedPreferences.getString("unlock", "3"));
         getNextWord();
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i == TextToSpeech.SUCCESS) {
+                    textToSpeech.setLanguage(Locale.US);
+                } else {
+                    Toast.makeText(MainActivity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.play_voice:
+                String content = wordText.getText().toString();
+                textToSpeech.speak(content, TextToSpeech.QUEUE_ADD, null);
                 break;
         }
     }
